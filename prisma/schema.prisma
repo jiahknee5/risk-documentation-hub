@@ -1,0 +1,279 @@
+// Risk Documentation Hub Database Schema
+// Comprehensive schema for document management, security, and audit trail
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User Management
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String
+  password    String   // hashed
+  role        UserRole @default(USER)
+  department  String?
+  isActive    Boolean  @default(true)
+  lastLogin   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  documents        Document[]
+  auditLogs        AuditLog[]
+  documentAccess   DocumentAccess[]
+  approvals        Approval[]
+  comments         Comment[]
+  approvedDocuments Document[] @relation("ApprovedDocuments")
+  uploadedVersions DocumentVersion[] @relation("UploadedVersions")
+  grantedAccess    DocumentAccess[] @relation("GrantedAccess")
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  USER
+  VIEWER
+}
+
+// Document Management
+model Document {
+  id               String           @id @default(cuid())
+  title            String
+  description      String?
+  category         DocumentCategory
+  subCategory      String?
+  filePath         String
+  fileName         String
+  fileSize         Int
+  mimeType         String
+  version          Int              @default(1)
+  riskLevel        RiskLevel
+  complianceStatus ComplianceStatus @default(PENDING)
+  tags             String?          // JSON array of tags
+  content          String?          // Extracted text content for search
+  summary          String?          // AI-generated summary
+  keyPoints        String?          // JSON array of key points
+  uploadedBy       String
+  approvedBy       String?
+  approvedAt       DateTime?
+  expiryDate       DateTime?
+  isActive         Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  // Relations
+  user            User               @relation(fields: [uploadedBy], references: [id])
+  approver        User?              @relation("ApprovedDocuments", fields: [approvedBy], references: [id])
+  versions        DocumentVersion[]
+  access          DocumentAccess[]
+  auditLogs       AuditLog[]
+  approvals       Approval[]
+  comments        Comment[]
+  complianceChecks ComplianceCheck[]
+
+  @@index([category])
+  @@index([riskLevel])
+  @@index([createdAt])
+  @@index([uploadedBy])
+  @@map("documents")
+}
+
+enum DocumentCategory {
+  COMPLIANCE
+  OPERATIONAL_RISK
+  FINANCIAL_RISK
+  CYBERSECURITY
+  REGULATORY
+  POLICY
+  PROCEDURE
+  ASSESSMENT
+  REPORT
+  OTHER
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ComplianceStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  UNDER_REVIEW
+  EXPIRED
+}
+
+// Document Versioning
+model DocumentVersion {
+  id           String   @id @default(cuid())
+  documentId   String
+  version      Int
+  filePath     String
+  fileName     String
+  changes      String?  // Description of changes
+  uploadedBy   String
+  createdAt    DateTime @default(now())
+
+  // Relations
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user     User     @relation("UploadedVersions", fields: [uploadedBy], references: [id])
+
+  @@unique([documentId, version])
+  @@map("document_versions")
+}
+
+// Access Control
+model DocumentAccess {
+  id         String      @id @default(cuid())
+  documentId String
+  userId     String
+  accessType AccessType
+  grantedBy  String
+  grantedAt  DateTime    @default(now())
+  expiresAt  DateTime?
+  isActive   Boolean     @default(true)
+
+  // Relations
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
+  granter  User     @relation("GrantedAccess", fields: [grantedBy], references: [id])
+
+  @@unique([documentId, userId])
+  @@map("document_access")
+}
+
+enum AccessType {
+  VIEW
+  DOWNLOAD
+  EDIT
+  ADMIN
+}
+
+// Audit Trail
+model AuditLog {
+  id         String     @id @default(cuid())
+  userId     String?
+  documentId String?
+  action     AuditAction
+  details    String?    // JSON object with action details
+  ipAddress  String?
+  userAgent  String?
+  timestamp  DateTime   @default(now())
+
+  // Relations
+  user     User?     @relation(fields: [userId], references: [id])
+  document Document? @relation(fields: [documentId], references: [id])
+
+  @@index([userId])
+  @@index([documentId])
+  @@index([action])
+  @@index([timestamp])
+  @@map("audit_logs")
+}
+
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  DOCUMENT_VIEW
+  DOCUMENT_DOWNLOAD
+  DOCUMENT_UPLOAD
+  DOCUMENT_EDIT
+  DOCUMENT_DELETE
+  DOCUMENT_APPROVE
+  DOCUMENT_REJECT
+  ACCESS_GRANTED
+  ACCESS_REVOKED
+  USER_CREATED
+  USER_UPDATED
+  USER_DELETED
+  SEARCH_PERFORMED
+}
+
+// Approval Workflow
+model Approval {
+  id         String        @id @default(cuid())
+  documentId String
+  userId     String
+  status     ApprovalStatus
+  comments   String?
+  requestedAt DateTime     @default(now())
+  reviewedAt DateTime?
+
+  // Relations
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@map("approvals")
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_REVISION
+}
+
+// Comments System
+model Comment {
+  id         String   @id @default(cuid())
+  documentId String
+  userId     String
+  content    String
+  isResolved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@map("comments")
+}
+
+// Compliance Tracking
+model ComplianceCheck {
+  id           String          @id @default(cuid())
+  documentId   String
+  checkType    ComplianceType
+  status       ComplianceStatus
+  findings     String?         // JSON array of findings
+  checkedAt    DateTime        @default(now())
+  nextCheckDue DateTime?
+
+  // Relations
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("compliance_checks")
+}
+
+enum ComplianceType {
+  SOX
+  GDPR
+  HIPAA
+  PCI_DSS
+  ISO_27001
+  NIST
+  CUSTOM
+}
+
+// System Configuration
+model SystemConfig {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+  type  String @default("string") // string, number, boolean, json
+
+  @@map("system_config")
+}
