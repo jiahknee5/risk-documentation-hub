@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ results: [] })
     }
 
-    let searchResults = []
+    let searchResults: any[] = []
 
     if (type === 'all' || type === 'exact') {
       // Full-text search across multiple fields
