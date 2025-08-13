@@ -6,8 +6,9 @@ import { authOptions } from '@/lib/auth'
 // GET /api/documents/[id] - Get single document
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   try {
     const session = await getServerSession(authOptions)
     if (!session?.user) {
@@ -15,7 +16,7 @@ export async function GET(
     }
 
     const document = await prisma.document.findUnique({
-      where: { id: params.id },
+      where: { id: id },
       include: {
         user: {
           select: { id: true, name: true, email: true, department: true }
@@ -85,8 +86,9 @@ export async function GET(
 // PUT /api/documents/[id] - Update document
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   try {
     const session = await getServerSession(authOptions)
     if (!session?.user) {
@@ -107,7 +109,7 @@ export async function PUT(
 
     // Check if document exists and user has permission
     const existingDocument = await prisma.document.findUnique({
-      where: { id: params.id }
+      where: { id: id }
     })
 
     if (!existingDocument) {
@@ -124,7 +126,7 @@ export async function PUT(
 
     // Update document
     const document = await prisma.document.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
         title,
         description,
@@ -171,8 +173,9 @@ export async function PUT(
 // DELETE /api/documents/[id] - Delete document (soft delete)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   try {
     const session = await getServerSession(authOptions)
     if (!session?.user) {
@@ -181,7 +184,7 @@ export async function DELETE(
 
     // Check if document exists and user has permission
     const existingDocument = await prisma.document.findUnique({
-      where: { id: params.id }
+      where: { id: id }
     })
 
     if (!existingDocument) {
@@ -198,7 +201,7 @@ export async function DELETE(
 
     // Soft delete (mark as inactive)
     await prisma.document.update({
-      where: { id: params.id },
+      where: { id: id },
       data: { isActive: false }
     })
 
@@ -206,7 +209,7 @@ export async function DELETE(
     await prisma.auditLog.create({
       data: {
         userId: session.user.id,
-        documentId: params.id,
+        documentId: id,
         action: 'DOCUMENT_DELETE',
         details: JSON.stringify({
           title: existingDocument.title,
