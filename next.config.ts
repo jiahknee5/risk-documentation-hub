@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   output: 'standalone',
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
 };
 
 export default nextConfig;

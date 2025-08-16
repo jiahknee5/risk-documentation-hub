@@ -3,6 +3,25 @@ import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/db'
 import { authOptions } from '@/lib/auth'
 
+// Define search result type
+interface SearchResult {
+  id: string
+  title: string
+  description: string | null
+  category: string
+  riskLevel: string
+  complianceStatus: string
+  createdAt: Date
+  user: {
+    id: string
+    name: string
+    email: string
+    department: string | null
+  }
+  relevanceScore: number
+  matchType: string
+}
+
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
@@ -19,7 +38,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ results: [] })
     }
 
-    let searchResults: any[] = []
+    let searchResults: SearchResult[] = []
 
     if (type === 'all' || type === 'exact') {
       // Full-text search across multiple fields
@@ -262,7 +281,7 @@ export async function POST(request: NextRequest) {
     ])
 
     // Calculate relevance scores if query provided
-    let results = documents
+    let results: any[] = documents
     if (query && query.trim()) {
       results = documents.map(doc => ({
         ...doc,
@@ -271,7 +290,7 @@ export async function POST(request: NextRequest) {
       }))
 
       if (sortBy === 'relevance') {
-        results.sort((a, b) => b.relevanceScore - a.relevanceScore)
+        results.sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
       }
     }
 

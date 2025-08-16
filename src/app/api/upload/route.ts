@@ -5,7 +5,6 @@ import { join } from 'path'
 import { authOptions } from '@/lib/auth'
 import { generateDocumentSummary } from '@/lib/ai'
 import { sanitizeFilename } from '@/lib/utils'
-import pdfParse from 'pdf-parse'
 
 const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || '10485760') // 10MB
 const UPLOAD_DIR = join(process.cwd(), 'uploads')
@@ -24,6 +23,7 @@ async function extractTextFromFile(file: File): Promise<string> {
     const buffer = Buffer.from(await file.arrayBuffer())
     
     if (file.type === 'application/pdf') {
+      const pdfParse = (await import('pdf-parse')).default
       const pdfData = await pdfParse(buffer)
       return pdfData.text
     }

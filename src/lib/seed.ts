@@ -1,4 +1,4 @@
-import { PrismaClient } from '@/generated/prisma'
+import { PrismaClient, DocumentCategory, RiskLevel, ComplianceStatus, UserRole } from '@/generated/prisma'
 import { hashPassword } from './auth'
 
 const prisma = new PrismaClient()
@@ -18,7 +18,7 @@ export async function seedDatabase() {
         email: 'admin@example.com',
         name: 'Admin User',
         password: adminPassword,
-        role: 'ADMIN',
+        role: UserRole.ADMIN,
         department: 'Risk Management'
       }
     })
@@ -30,7 +30,7 @@ export async function seedDatabase() {
         email: 'user@example.com',
         name: 'John Doe',
         password: userPassword,
-        role: 'USER',
+        role: UserRole.USER,
         department: 'Finance'
       }
     })
@@ -42,7 +42,7 @@ export async function seedDatabase() {
         email: 'manager@example.com',
         name: 'Jane Smith',
         password: userPassword,
-        role: 'MANAGER',
+        role: UserRole.MANAGER,
         department: 'Compliance'
       }
     })
@@ -54,8 +54,8 @@ export async function seedDatabase() {
       {
         title: 'Information Security Policy',
         description: 'Company-wide information security policy outlining data protection standards and procedures.',
-        category: 'POLICY',
-        riskLevel: 'HIGH',
+        category: DocumentCategory.POLICY,
+        riskLevel: RiskLevel.HIGH,
         tags: JSON.stringify(['security', 'policy', 'data-protection']),
         fileName: 'info_security_policy.pdf',
         filePath: 'uploads/sample_info_security_policy.pdf',
@@ -70,13 +70,13 @@ export async function seedDatabase() {
           'Regular security awareness training mandatory'
         ]),
         uploadedBy: adminUser.id,
-        complianceStatus: 'APPROVED'
+        complianceStatus: ComplianceStatus.APPROVED
       },
       {
         title: 'Risk Assessment Framework',
         description: 'Operational risk assessment methodology and framework for identifying and managing business risks.',
-        category: 'OPERATIONAL_RISK',
-        riskLevel: 'CRITICAL',
+        category: DocumentCategory.OPERATIONAL_RISK,
+        riskLevel: RiskLevel.CRITICAL,
         tags: JSON.stringify(['risk-assessment', 'framework', 'operations']),
         fileName: 'risk_assessment_framework.docx',
         filePath: 'uploads/sample_risk_framework.docx',
@@ -91,13 +91,13 @@ export async function seedDatabase() {
           'Continuous monitoring and reporting requirements'
         ]),
         uploadedBy: managerUser.id,
-        complianceStatus: 'UNDER_REVIEW'
+        complianceStatus: ComplianceStatus.UNDER_REVIEW
       },
       {
         title: 'GDPR Compliance Procedures',
         description: 'Detailed procedures for ensuring GDPR compliance including data subject rights and breach notification.',
-        category: 'COMPLIANCE',
-        riskLevel: 'HIGH',
+        category: DocumentCategory.COMPLIANCE,
+        riskLevel: RiskLevel.HIGH,
         tags: JSON.stringify(['gdpr', 'compliance', 'data-privacy']),
         fileName: 'gdpr_procedures.pdf',
         filePath: 'uploads/sample_gdpr_procedures.pdf',
@@ -112,13 +112,13 @@ export async function seedDatabase() {
           'Privacy impact assessments required for high-risk processing'
         ]),
         uploadedBy: normalUser.id,
-        complianceStatus: 'APPROVED'
+        complianceStatus: ComplianceStatus.APPROVED
       },
       {
         title: 'Financial Risk Management Policy',
         description: 'Policy governing financial risk management including credit risk, market risk, and liquidity risk.',
-        category: 'FINANCIAL_RISK',
-        riskLevel: 'MEDIUM',
+        category: DocumentCategory.FINANCIAL_RISK,
+        riskLevel: RiskLevel.MEDIUM,
         tags: JSON.stringify(['financial-risk', 'policy', 'credit-risk']),
         fileName: 'financial_risk_policy.pdf',
         filePath: 'uploads/sample_financial_risk.pdf',
@@ -133,13 +133,13 @@ export async function seedDatabase() {
           'Risk committee oversight and reporting'
         ]),
         uploadedBy: normalUser.id,
-        complianceStatus: 'PENDING'
+        complianceStatus: ComplianceStatus.PENDING
       },
       {
         title: 'Incident Response Playbook',
         description: 'Step-by-step incident response procedures for cybersecurity incidents and data breaches.',
-        category: 'CYBERSECURITY',
-        riskLevel: 'CRITICAL',
+        category: DocumentCategory.CYBERSECURITY,
+        riskLevel: RiskLevel.CRITICAL,
         tags: JSON.stringify(['incident-response', 'cybersecurity', 'procedures']),
         fileName: 'incident_response_playbook.pdf',
         filePath: 'uploads/sample_incident_response.pdf',
@@ -154,7 +154,7 @@ export async function seedDatabase() {
           'Communication protocols for stakeholders and authorities'
         ]),
         uploadedBy: adminUser.id,
-        complianceStatus: 'APPROVED'
+        complianceStatus: ComplianceStatus.APPROVED
       }
     ]
 
