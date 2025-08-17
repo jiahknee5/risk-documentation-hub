@@ -18,6 +18,7 @@ import Navbar from './Navbar'
 import SearchBar from './SearchBar'
 import DocumentCard from './DocumentCard'
 import StatsCard from './StatsCard'
+import { getApiUrl } from '@/lib/config'
 
 interface DashboardStats {
   totalDocuments: number
@@ -42,8 +43,8 @@ export default function Dashboard() {
     try {
       // Fetch dashboard statistics
       const [documentsRes, statsRes] = await Promise.all([
-        fetch('/api/documents?limit=5&sortBy=createdAt&sortOrder=desc'),
-        fetch('/api/dashboard/stats')
+        fetch(getApiUrl('/documents?limit=5&sortBy=createdAt&sortOrder=desc')),
+        fetch(getApiUrl('/dashboard/stats'))
       ])
 
       if (documentsRes.ok) {
@@ -51,15 +52,20 @@ export default function Dashboard() {
         setRecentDocuments(documentsData.documents || [])
       }
 
-      // For now, we'll use mock stats since we haven't created the stats API yet
-      setStats({
-        totalDocuments: 248,
-        pendingApprovals: 12,
-        expiringSoon: 8,
-        criticalRisk: 15,
-        recentUploads: 23,
-        complianceRate: 87
-      })
+      if (statsRes.ok) {
+        const statsData = await statsRes.json()
+        setStats(statsData)
+      } else {
+        // Fallback to mock stats if API fails
+        setStats({
+          totalDocuments: 0,
+          pendingApprovals: 0,
+          expiringSoon: 0,
+          criticalRisk: 0,
+          recentUploads: 0,
+          complianceRate: 0
+        })
+      }
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
     } finally {

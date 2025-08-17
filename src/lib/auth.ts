@@ -73,8 +73,9 @@ export const authOptions: NextAuthOptions = {
     }
   },
   pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout'
+    signIn: '/ragdocumenthub/auth/signin',
+    signOut: '/ragdocumenthub/auth/signout',
+    error: '/ragdocumenthub/auth/error'
   }
 }
 
