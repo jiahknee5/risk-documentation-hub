@@ -3,10 +3,10 @@ import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from './db'
+import { ensureDatabase } from './db-init'
 import { UserRole } from '@/generated/prisma'
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -18,6 +18,9 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           return null
         }
+
+        // Ensure database is initialized
+        await ensureDatabase()
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email }
@@ -53,19 +56,25 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
+  },
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role
         token.department = user.department
+        token.userId = user.id
       }
       return token
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.sub!
+        session.user.id = token.userId as string || token.sub!
         session.user.role = token.role as UserRole
         session.user.department = token.department as string | undefined
       }
@@ -73,10 +82,11 @@ export const authOptions: NextAuthOptions = {
     }
   },
   pages: {
-    signIn: '/ragdocumenthub/auth/signin',
-    signOut: '/ragdocumenthub/auth/signout',
-    error: '/ragdocumenthub/auth/error'
-  }
+    signIn: '/auth/signin',
+    signOut: '/auth/signout',
+    error: '/auth/error'
+  },
+  debug: process.env.NODE_ENV === 'development'
 }
 
 export async function hashPassword(password: string): Promise<string> {

@@ -1,0 +1,36 @@
+
+> risk-documentation-hub@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.4.6 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.159:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Compiled middleware in 115ms
+ ✓ Ready in 895ms
+ ○ Compiling /api/seed-db ...
+ ✓ Compiled /api/seed-db in 589ms
+🌱 Seeding production database...
+🌱 Starting database seed...
+✅ Created demo users
+✅ Created sample documents
+✅ Created audit logs
+🎉 Database seed completed successfully!
+ POST /api/seed-db?secret=setup-risk-docs-2024 200 in 1099ms
+ ✓ Compiled /api/auth/[...nextauth] in 162ms
+ POST /api/auth/callback/credentials 302 in 425ms
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 1019ms
+ GET /auth/signin 200 in 1137ms
+   Reload env: .env
+   Reload env: .env
+ ✓ Compiled middleware in 4ms
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 4ms
+   Reload env: .env
+   Reload env: .env
+   Reload env: .env
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled in 2ms

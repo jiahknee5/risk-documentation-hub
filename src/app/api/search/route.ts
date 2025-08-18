@@ -46,12 +46,12 @@ export async function GET(request: NextRequest) {
         where: {
           isActive: true,
           OR: [
-            { title: { contains: query, mode: 'insensitive' } },
-            { description: { contains: query, mode: 'insensitive' } },
-            { content: { contains: query, mode: 'insensitive' } },
-            { tags: { contains: query, mode: 'insensitive' } },
-            { summary: { contains: query, mode: 'insensitive' } },
-            { keyPoints: { contains: query, mode: 'insensitive' } }
+            { title: { contains: query } },
+            { description: { contains: query } },
+            { content: { contains: query } },
+            { tags: { contains: query } },
+            { summary: { contains: query } },
+            { keyPoints: { contains: query } }
           ]
         },
         take: limit,
@@ -222,11 +222,11 @@ export async function POST(request: NextRequest) {
     // Add text search
     if (query && query.trim()) {
       where.OR = [
-        { title: { contains: query, mode: 'insensitive' } },
-        { description: { contains: query, mode: 'insensitive' } },
-        { content: { contains: query, mode: 'insensitive' } },
-        { tags: { contains: query, mode: 'insensitive' } },
-        { summary: { contains: query, mode: 'insensitive' } }
+        { title: { contains: query } },
+        { description: { contains: query } },
+        { content: { contains: query } },
+        { tags: { contains: query } },
+        { summary: { contains: query } }
       ]
     }
 

@@ -1,5 +1,9 @@
 import { PrismaClient, DocumentCategory, RiskLevel, ComplianceStatus, UserRole } from '@/generated/prisma'
-import { hashPassword } from './auth'
+import bcryptjs from 'bcryptjs'
+
+async function hashPassword(password: string): Promise<string> {
+  return bcryptjs.hash(password, 10)
+}
 
 const prisma = new PrismaClient()
 
@@ -13,37 +17,65 @@ export async function seedDatabase() {
 
     const adminUser = await prisma.user.upsert({
       where: { email: 'admin@example.com' },
-      update: {},
+      update: {
+        password: adminPassword,
+        isActive: true
+      },
       create: {
         email: 'admin@example.com',
         name: 'Admin User',
         password: adminPassword,
         role: UserRole.ADMIN,
-        department: 'Risk Management'
+        department: 'Risk Management',
+        isActive: true
       }
     })
 
     const normalUser = await prisma.user.upsert({
       where: { email: 'user@example.com' },
-      update: {},
+      update: {
+        password: userPassword,
+        isActive: true
+      },
       create: {
         email: 'user@example.com',
         name: 'John Doe',
         password: userPassword,
         role: UserRole.USER,
-        department: 'Finance'
+        department: 'Finance',
+        isActive: true
       }
     })
 
     const managerUser = await prisma.user.upsert({
       where: { email: 'manager@example.com' },
-      update: {},
+      update: {
+        password: userPassword,
+        isActive: true
+      },
       create: {
         email: 'manager@example.com',
         name: 'Jane Smith',
         password: userPassword,
         role: UserRole.MANAGER,
-        department: 'Compliance'
+        department: 'Compliance',
+        isActive: true
+      }
+    })
+
+    const viewerUser = await prisma.user.upsert({
+      where: { email: 'viewer@example.com' },
+      update: {
+        password: userPassword,
+        isActive: true
+      },
+      create: {
+        email: 'viewer@example.com',
+        name: 'Viewer User',
+        password: userPassword,
+        role: UserRole.VIEWER,
+        department: 'Operations',
+        isActive: true
       }
     })
 

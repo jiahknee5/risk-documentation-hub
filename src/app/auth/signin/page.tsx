@@ -33,7 +33,7 @@ export default function SignIn() {
         // Check if sign in was successful
         const session = await getSession()
         if (session) {
-          router.push('/ragdocumenthub')
+          router.push('/')
           router.refresh()
         }
       }
@@ -158,9 +158,10 @@ export default function SignIn() {
             <div className="mt-4 bg-gray-50 rounded-md p-4">
               <p className="text-sm text-gray-600 mb-2">For demo purposes, you can use:</p>
               <div className="space-y-1 text-sm font-mono">
-                <p><span className="text-gray-500">Admin:</span> admin@example.com / Admin123!</p>
-                <p><span className="text-gray-500">Manager:</span> manager@example.com / Manager123!</p>
-                <p><span className="text-gray-500">User:</span> user@example.com / User123!</p>
+                <p><span className="text-gray-500">Admin:</span> admin@example.com / password123</p>
+                <p><span className="text-gray-500">Manager:</span> manager@example.com / password123</p>
+                <p><span className="text-gray-500">User:</span> user@example.com / password123</p>
+                <p><span className="text-gray-500">Viewer:</span> viewer@example.com / password123</p>
               </div>
             </div>
           </div>
