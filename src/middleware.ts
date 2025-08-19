@@ -4,35 +4,17 @@ import { getToken } from 'next-auth/jwt'
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
-  // Public routes that don't need authentication
-  const publicRoutes = [
-    '/api/auth',
-    '/auth',
-    '/api/seed-db',
-    '/api/test-db', 
-    '/api/test-deployment',
-    '/api/init-db',
-    '/api/setup',
-    '/api/bootstrap',
-    '/bootstrap',
-    '/db-init.html',
-    '/init-db.js',
-    '/',
-    '/favicon.ico',
-    '/_next',
-    '/public'
-  ]
-  
-  // Check if current path should be allowed without auth
-  const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route) || pathname === route)
-  
-  console.log(`Middleware: ${pathname} - isPublic: ${isPublicRoute}`)
-  
-  if (isPublicRoute) {
+  // Let all API routes through (they handle their own auth if needed)
+  if (pathname.startsWith('/api/')) {
     return NextResponse.next()
   }
   
-  // For protected routes, check authentication
+  // Let auth routes through
+  if (pathname.startsWith('/auth') || pathname === '/') {
+    return NextResponse.next()
+  }
+  
+  // For protected page routes, check authentication
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
   
   if (!token) {
@@ -49,8 +31,11 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for static files
+     * Match all request paths except:
+     * - api routes (handled separately)
+     * - static files
+     * - auth routes
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|auth).*)',
   ]
 }
