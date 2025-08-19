@@ -16,6 +16,7 @@ export default withAuth(
             pathname.startsWith('/auth') ||
             pathname === '/api/seed-db' ||
             pathname === '/api/test-db' ||
+            pathname === '/api/init-db' ||
             pathname === '/' ||
             pathname === '/favicon.ico') {
           return true

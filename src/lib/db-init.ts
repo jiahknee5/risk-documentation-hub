@@ -3,8 +3,9 @@ import bcryptjs from 'bcryptjs'
 
 export async function ensureDatabase() {
   try {
-    // First ensure the schema exists
+    // First ensure all the tables exist
     try {
+      // Create users table
       await prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "users" (
         "id" TEXT NOT NULL PRIMARY KEY,
         "email" TEXT NOT NULL UNIQUE,
@@ -17,8 +18,44 @@ export async function ensureDatabase() {
         "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
       )`
+      
+      // Create documents table
+      await prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "documents" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "title" TEXT NOT NULL,
+        "description" TEXT,
+        "filename" TEXT NOT NULL,
+        "filepath" TEXT NOT NULL,
+        "filesize" INTEGER NOT NULL,
+        "mimetype" TEXT NOT NULL,
+        "category" TEXT NOT NULL,
+        "tags" TEXT,
+        "uploadedById" TEXT NOT NULL,
+        "isActive" BOOLEAN NOT NULL DEFAULT true,
+        "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY ("uploadedById") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+      )`
+      
+      // Create audit logs table
+      await prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "audit_logs" (
+        "id" TEXT NOT NULL PRIMARY KEY,
+        "action" TEXT NOT NULL,
+        "resource" TEXT,
+        "details" TEXT,
+        "category" TEXT NOT NULL,
+        "userId" TEXT NOT NULL,
+        "userEmail" TEXT NOT NULL,
+        "userName" TEXT,
+        "ipAddress" TEXT,
+        "userAgent" TEXT,
+        "timestamp" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+      )`
+      
+      console.log('✅ All database tables created/verified')
     } catch (schemaError) {
-      console.log('Schema may already exist, continuing...')
+      console.log('Schema may already exist, continuing...', schemaError)
     }
     
     // Try to connect and check if users exist
