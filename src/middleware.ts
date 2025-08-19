@@ -16,6 +16,7 @@ export default withAuth(
             pathname.startsWith('/auth') ||
             pathname === '/api/seed-db' ||
             pathname === '/api/test-db' ||
+            pathname === '/api/test-deployment' ||
             pathname === '/api/init-db' ||
             pathname === '/api/setup' ||
             pathname === '/api/bootstrap' ||
