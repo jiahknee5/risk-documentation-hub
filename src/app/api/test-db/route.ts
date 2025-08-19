@@ -20,9 +20,9 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       connection: 'working',
-      userCount,
+      userCount: Number(userCount),
       adminExists: !!adminUser,
-      testQuery: result
+      testQuery: 'SELECT 1 executed successfully'
     })
   } catch (error) {
     console.error('Database test failed:', error)
