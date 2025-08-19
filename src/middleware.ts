@@ -18,6 +18,7 @@ export default withAuth(
             pathname === '/api/test-db' ||
             pathname === '/api/init-db' ||
             pathname === '/api/setup' ||
+            pathname === '/bootstrap' ||
             pathname === '/' ||
             pathname === '/favicon.ico') {
           return true
