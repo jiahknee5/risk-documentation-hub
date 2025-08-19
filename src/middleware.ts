@@ -11,14 +11,16 @@ export default withAuth(
       authorized: ({ req, token }) => {
         const pathname = req.nextUrl.pathname
         
-        // Allow auth endpoints
+        // Allow auth endpoints and setup
         if (pathname.startsWith('/api/auth') || 
             pathname.startsWith('/auth') ||
             pathname === '/api/seed-db' ||
             pathname === '/api/test-db' ||
             pathname === '/api/init-db' ||
             pathname === '/api/setup' ||
+            pathname === '/api/bootstrap' ||
             pathname === '/bootstrap' ||
+            pathname === '/db-init.html' ||
             pathname === '/' ||
             pathname === '/favicon.ico') {
           return true
