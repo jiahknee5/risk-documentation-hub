@@ -50,7 +50,9 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public folder
+     * - api/auth (NextAuth endpoints)
+     * - api/setup, api/init-db, api/bootstrap (database setup)
      */
-    '/((?!_next/static|_next/image|favicon.ico|public).*)',
+    '/((?!_next/static|_next/image|favicon.ico|public|api/auth|api/setup|api/init-db|api/bootstrap|api/seed-db|api/test-db|init\\.html).*)',
   ]
 }

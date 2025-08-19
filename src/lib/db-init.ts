@@ -3,9 +3,11 @@ import bcryptjs from 'bcryptjs'
 
 export async function ensureDatabase() {
   try {
+    console.log('🚀 Starting database initialization...')
+    
     // First ensure all the tables exist
     try {
-      // Create users table
+      console.log('Creating users table...')
       await prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "users" (
         "id" TEXT NOT NULL PRIMARY KEY,
         "email" TEXT NOT NULL UNIQUE,
@@ -71,43 +73,25 @@ export async function ensureDatabase() {
     // Create demo users
     const hashedPassword = await bcryptjs.hash('password123', 10)
     
+    // Create users using raw SQL to avoid Prisma issues
     const users = [
-      {
-        email: 'admin@example.com',
-        name: 'System Admin',
-        password: hashedPassword,
-        role: 'ADMIN' as const,
-        department: 'IT',
-        isActive: true
-      },
-      {
-        email: 'manager@example.com',
-        name: 'Risk Manager',
-        password: hashedPassword,
-        role: 'MANAGER' as const,
-        department: 'Risk Management',
-        isActive: true
-      },
-      {
-        email: 'user@example.com',
-        name: 'John User',
-        password: hashedPassword,
-        role: 'USER' as const,
-        department: 'Operations',
-        isActive: true
-      },
-      {
-        email: 'viewer@example.com',
-        name: 'Jane Viewer',
-        password: hashedPassword,
-        role: 'VIEWER' as const,
-        department: 'Compliance',
-        isActive: true
-      }
+      ['admin-001', 'admin@example.com', 'System Admin', hashedPassword, 'ADMIN', 'IT'],
+      ['manager-002', 'manager@example.com', 'Risk Manager', hashedPassword, 'MANAGER', 'Risk Management'],
+      ['user-003', 'user@example.com', 'John User', hashedPassword, 'USER', 'Operations'],
+      ['viewer-004', 'viewer@example.com', 'Jane Viewer', hashedPassword, 'VIEWER', 'Compliance']
     ]
 
-    for (const userData of users) {
-      await prisma.user.create({ data: userData })
+    for (const [id, email, name, password, role, department] of users) {
+      try {
+        console.log(`Creating user: ${email}`)
+        await prisma.$executeRaw`
+          INSERT OR REPLACE INTO users (id, email, name, password, role, department, isActive, createdAt, updatedAt)
+          VALUES (${id}, ${email}, ${name}, ${password}, ${role}, ${department}, 1, datetime('now'), datetime('now'))
+        `
+        console.log(`✅ User created: ${email}`)
+      } catch (userError) {
+        console.error(`Failed to create user ${email}:`, userError)
+      }
     }
 
     console.log('✅ Database initialized successfully')

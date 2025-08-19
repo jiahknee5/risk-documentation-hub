@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Documentation Hub - Database Initialization</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fafb;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1f2937;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 10px 10px 0;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .error {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .info {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            color: #1e40af;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .credentials {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #3b82f6;
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Risk Documentation Hub - Database Setup</h1>
+        
+        <div class="info">
+            <strong>Welcome!</strong> This page will help you initialize the database for the Risk Documentation Hub.
+            Follow the steps below in order.
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Test Database Connection</h3>
+            <p>First, let's check if the database is accessible:</p>
+            <button onclick="testDatabase()">Test Database Connection</button>
+            <div id="testResult"></div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Initialize Database Tables</h3>
+            <p>Create the basic database structure:</p>
+            <button onclick="initializeDatabase()">Initialize Database</button>
+            <div id="initResult"></div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Seed Demo Data</h3>
+            <p>Add sample users and documents:</p>
+            <button onclick="seedDatabase()">Seed Database</button>
+            <div id="seedResult"></div>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Test Login</h3>
+            <p>Verify the authentication system is working:</p>
+            <button onclick="testLogin()">Test Login</button>
+            <div id="loginResult"></div>
+        </div>
+
+        <div class="credentials">
+            <h4>📋 Demo Credentials</h4>
+            <p>Once setup is complete, you can use these credentials:</p>
+            <ul>
+                <li><strong>Admin:</strong> admin@example.com / password123</li>
+                <li><strong>Manager:</strong> manager@example.com / password123</li>
+                <li><strong>User:</strong> user@example.com / password123</li>
+                <li><strong>Viewer:</strong> viewer@example.com / password123</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🎯 Ready to Use!</h3>
+            <p>Once all steps are complete, you can:</p>
+            <a href="/auth/signin" style="background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+                → Go to Login Page
+            </a>
+        </div>
+    </div>
+
+    <script>
+        async function makeRequest(url, options = {}) {
+            const result = document.createElement('div');
+            try {
+                result.innerHTML = '<div style="color: #6b7280;">Making request...</div>';
+                
+                const response = await fetch(url, {
+                    ...options,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    result.className = 'success';
+                    result.innerHTML = `
+                        <strong>✅ Success!</strong><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    result.className = 'error';
+                    result.innerHTML = `
+                        <strong>❌ Error (${response.status}):</strong><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                result.className = 'error';
+                result.innerHTML = `
+                    <strong>❌ Network Error:</strong><br>
+                    <pre>${error.message}</pre>
+                `;
+            }
+            return result;
+        }
+
+        async function testDatabase() {
+            const button = event.target;
+            button.disabled = true;
+            const resultDiv = document.getElementById('testResult');
+            resultDiv.innerHTML = '';
+            
+            const result = await makeRequest('/api/test-db');
+            resultDiv.appendChild(result);
+            
+            button.disabled = false;
+        }
+
+        async function initializeDatabase() {
+            const button = event.target;
+            button.disabled = true;
+            const resultDiv = document.getElementById('initResult');
+            resultDiv.innerHTML = '';
+            
+            // Try multiple endpoints for initialization
+            let result;
+            
+            // Try bootstrap endpoint first
+            result = await makeRequest('/api/bootstrap', { method: 'POST' });
+            resultDiv.appendChild(result);
+            
+            // If that fails, try setup endpoint
+            if (result.className === 'error') {
+                const setupResult = await makeRequest('/api/setup', { method: 'POST' });
+                resultDiv.appendChild(setupResult);
+            }
+            
+            button.disabled = false;
+        }
+
+        async function seedDatabase() {
+            const button = event.target;
+            button.disabled = true;
+            const resultDiv = document.getElementById('seedResult');
+            resultDiv.innerHTML = '';
+            
+            const result = await makeRequest('/api/seed-db?secret=setup-risk-docs-2024', { method: 'POST' });
+            resultDiv.appendChild(result);
+            
+            button.disabled = false;
+        }
+
+        async function testLogin() {
+            const button = event.target;
+            button.disabled = true;
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.innerHTML = '';
+            
+            try {
+                // First get CSRF token
+                const csrfResponse = await fetch('/api/auth/csrf');
+                const csrfData = await csrfResponse.json();
+                
+                // Then try to login
+                const loginResponse = await fetch('/api/auth/callback/credentials', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        csrfToken: csrfData.csrfToken,
+                        email: 'admin@example.com',
+                        password: 'password123',
+                        callbackUrl: window.location.origin + '/dashboard',
+                        json: 'true'
+                    })
+                });
+                
+                const loginData = await loginResponse.json();
+                
+                const result = document.createElement('div');
+                if (loginData.url && !loginData.url.includes('error')) {
+                    result.className = 'success';
+                    result.innerHTML = `
+                        <strong>✅ Login test successful!</strong><br>
+                        <p>Authentication is working. You should be able to log in normally.</p>
+                        <a href="/auth/signin" style="background: #10b981; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px;">Try Login Page</a>
+                    `;
+                } else {
+                    result.className = 'error';
+                    result.innerHTML = `
+                        <strong>❌ Login test failed:</strong><br>
+                        <pre>${JSON.stringify(loginData, null, 2)}</pre>
+                    `;
+                }
+                
+                resultDiv.appendChild(result);
+                
+            } catch (error) {
+                const result = document.createElement('div');
+                result.className = 'error';
+                result.innerHTML = `
+                    <strong>❌ Login test error:</strong><br>
+                    <pre>${error.message}</pre>
+                `;
+                resultDiv.appendChild(result);
+            }
+            
+            button.disabled = false;
+        }
+
+        // Auto-run test on page load
+        window.addEventListener('load', () => {
+            setTimeout(testDatabase, 1000);
+        });
+    </script>
+</body>
+</html>
