@@ -24,7 +24,11 @@ export async function middleware(request: NextRequest) {
   ]
   
   // Check if current path should be allowed without auth
-  if (publicRoutes.some(route => pathname.startsWith(route) || pathname === route)) {
+  const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route) || pathname === route)
+  
+  console.log(`Middleware: ${pathname} - isPublic: ${isPublicRoute}`)
+  
+  if (isPublicRoute) {
     return NextResponse.next()
   }
   

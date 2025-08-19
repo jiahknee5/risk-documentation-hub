@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
     status: 'deployed',
     timestamp: new Date().toISOString(),
     message: 'Deployment verification successful',
-    version: 'ffd3bdc-enhanced-db-init'
+    version: '6fff4b2-middleware-fix'
   })
 }
 
