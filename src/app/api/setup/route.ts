@@ -99,8 +99,19 @@ export async function GET(request: NextRequest) {
         }
       ]
 
-      for (const userData of users) {
-        await prisma.user.create({ data: userData })
+      // Use raw SQL to avoid TypeScript role type issues
+      const userInserts = [
+        ['admin-123', 'admin@example.com', 'System Admin', hashedPassword, 'ADMIN', 'IT'],
+        ['manager-123', 'manager@example.com', 'Risk Manager', hashedPassword, 'MANAGER', 'Risk Management'],
+        ['user-123', 'user@example.com', 'John User', hashedPassword, 'USER', 'Operations'],
+        ['viewer-123', 'viewer@example.com', 'Jane Viewer', hashedPassword, 'VIEWER', 'Compliance']
+      ]
+      
+      for (const [id, email, name, password, role, department] of userInserts) {
+        await prisma.$executeRaw`
+          INSERT OR REPLACE INTO users (id, email, name, password, role, department, isActive, createdAt, updatedAt)
+          VALUES (${id}, ${email}, ${name}, ${password}, ${role}, ${department}, 1, datetime('now'), datetime('now'))
+        `
       }
       
       console.log('✅ Demo users created')

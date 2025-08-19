@@ -101,17 +101,17 @@ export async function GET(request: NextRequest) {
 
     // Insert users one by one, handling conflicts
     let usersCreated = 0
-    for (const userData of users) {
+    // Use raw SQL to avoid TypeScript type issues
+    for (const user of users) {
       try {
-        await prisma.user.upsert({
-          where: { email: userData.email },
-          update: userData,
-          create: userData
-        })
+        await prisma.$executeRaw`
+          INSERT OR REPLACE INTO users (id, email, name, password, role, department, isActive, createdAt, updatedAt)
+          VALUES (${user.id}, ${user.email}, ${user.name}, ${user.password}, ${user.role}, ${user.department}, 1, datetime('now'), datetime('now'))
+        `
         usersCreated++
-        console.log(`✅ User created/updated: ${userData.email}`)
+        console.log(`✅ User created/updated: ${user.email}`)
       } catch (error) {
-        console.log(`User ${userData.email} might already exist`)
+        console.log(`User ${user.email} creation failed:`, error)
       }
     }
     

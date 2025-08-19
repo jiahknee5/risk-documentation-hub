@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server'
 
 export default withAuth(
   function middleware(req) {
-    // Allow the request to continue
     return NextResponse.next()
   },
   {
@@ -11,31 +10,29 @@ export default withAuth(
       authorized: ({ req, token }) => {
         const pathname = req.nextUrl.pathname
         
-        // Allow auth endpoints and setup
-        if (pathname.startsWith('/api/auth') || 
-            pathname.startsWith('/auth') ||
-            pathname === '/api/seed-db' ||
-            pathname === '/api/test-db' ||
-            pathname === '/api/test-deployment' ||
-            pathname === '/api/init-db' ||
-            pathname === '/api/setup' ||
-            pathname === '/api/bootstrap' ||
-            pathname === '/bootstrap' ||
-            pathname === '/db-init.html' ||
-            pathname === '/' ||
-            pathname === '/favicon.ico') {
+        // Public routes that don't need authentication
+        const publicRoutes = [
+          '/api/auth',
+          '/auth',
+          '/api/seed-db',
+          '/api/test-db', 
+          '/api/test-deployment',
+          '/api/init-db',
+          '/api/setup',
+          '/api/bootstrap',
+          '/bootstrap',
+          '/db-init.html',
+          '/init-db.js',
+          '/',
+          '/favicon.ico'
+        ]
+        
+        // Check if current path should be allowed
+        if (publicRoutes.some(route => pathname.startsWith(route) || pathname === route)) {
           return true
         }
         
-        // Log for debugging
-        console.log('Middleware check:', {
-          pathname,
-          hasToken: !!token,
-          tokenSub: token?.sub,
-          tokenRole: token?.role
-        })
-        
-        // Require authentication for all other routes
+        // All other routes require authentication
         return !!token
       }
     }
