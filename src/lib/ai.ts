@@ -1,8 +1,9 @@
 import OpenAI from 'openai'
 
-const openai = new OpenAI({
+// Only initialize OpenAI if API key is available
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
-})
+}) : null
 
 export interface DocumentSummary {
   summary: string
@@ -15,6 +16,19 @@ export interface DocumentSummary {
 }
 
 export async function generateDocumentSummary(content: string): Promise<DocumentSummary> {
+  // If OpenAI is not configured, return fallback immediately
+  if (!openai) {
+    return {
+      summary: 'AI analysis not available - OpenAI API key not configured.',
+      keyPoints: ['Document uploaded successfully', 'Manual review required'],
+      riskAssessment: {
+        level: 'MEDIUM',
+        factors: ['Automated assessment unavailable']
+      },
+      complianceInsights: ['Manual compliance review recommended']
+    }
+  }
+
   try {
     const prompt = `
     Analyze the following document content and provide:
@@ -77,6 +91,11 @@ export async function generateDocumentSummary(content: string): Promise<Document
 }
 
 export async function detectDocumentChanges(oldContent: string, newContent: string): Promise<string[]> {
+  // If OpenAI is not configured, return fallback immediately
+  if (!openai) {
+    return ['AI comparison not available - manual review required']
+  }
+
   try {
     const prompt = `
     Compare these two versions of a document and identify the key changes:
@@ -124,6 +143,15 @@ export async function generateComplianceReport(documents: any[]): Promise<{
   gaps: string[]
   recommendations: string[]
 }> {
+  // If OpenAI is not configured, return fallback immediately
+  if (!openai) {
+    return {
+      summary: 'AI compliance analysis not available - OpenAI API key not configured.',
+      gaps: ['Automated gap analysis unavailable'],
+      recommendations: ['Configure OpenAI API for automated compliance analysis']
+    }
+  }
+
   try {
     const documentSummaries = documents.map(doc => ({
       title: doc.title,
