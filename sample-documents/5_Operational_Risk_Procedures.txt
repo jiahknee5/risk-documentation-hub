@@ -1,0 +1,422 @@
+OPERATIONAL RISK MANAGEMENT PROCEDURES
+=====================================
+
+Document Version: 1.5
+Effective Date: January 5, 2025
+Procedure Number: OPS-PROC-001
+Classification: INTERNAL USE
+Last Review: December 2024
+
+EXECUTIVE SUMMARY
+-----------------
+These procedures provide detailed guidance for implementing operational risk management across the organization. They establish consistent methods for identifying, assessing, controlling, and monitoring operational risks to minimize losses and improve operational efficiency.
+
+1. PURPOSE AND SCOPE
+--------------------
+1.1 Purpose
+- Standardize operational risk management practices
+- Provide clear procedures for risk identification
+- Establish assessment methodologies
+- Define control implementation standards
+- Ensure consistent monitoring and reporting
+
+1.2 Scope
+These procedures apply to:
+- All business processes and operations
+- Technology systems and infrastructure
+- Third-party relationships
+- Human resources management
+- Physical assets and facilities
+
+2. OPERATIONAL RISK DEFINITION
+------------------------------
+Operational risk is the risk of loss resulting from:
+- Inadequate or failed internal processes
+- People-related failures or misconduct
+- System failures or disruptions
+- External events impacting operations
+- Legal and compliance failures
+
+3. RISK IDENTIFICATION PROCEDURES
+---------------------------------
+3.1 Risk and Control Self-Assessment (RCSA)
+Frequency: Quarterly
+Participants: Process owners and teams
+
+Steps:
+1. Schedule RCSA workshop (2 weeks advance notice)
+2. Distribute pre-workshop materials
+3. Conduct facilitated workshop (2-3 hours)
+4. Document identified risks in standard template
+5. Validate risks with management
+6. Enter risks into risk register
+7. Assign risk owners and action dates
+
+3.2 Process Mapping
+Frequency: Annual or when processes change
+
+Steps:
+1. Select process for mapping
+2. Identify process stakeholders
+3. Document current state process flow
+4. Identify control points
+5. Highlight risk areas
+6. Document findings in risk register
+7. Review with process owner
+
+3.3 Loss Event Data Collection
+Frequency: As events occur
+
+Steps:
+1. Detect/report operational loss event
+2. Complete loss event form within 24 hours
+3. Investigate root causes within 5 days
+4. Document lessons learned
+5. Update risk register
+6. Implement corrective actions
+7. Monitor effectiveness
+
+4. RISK ASSESSMENT METHODOLOGY
+------------------------------
+4.1 Impact Assessment Scale
+
+Level 1 - Minimal ($0-$10K)
+- Minor process disruption
+- No customer impact
+- No regulatory concern
+
+Level 2 - Minor ($10K-$50K)
+- Limited process disruption
+- Minimal customer complaints
+- Minor compliance issue
+
+Level 3 - Moderate ($50K-$250K)
+- Significant process disruption
+- Multiple customer complaints
+- Regulatory warning possible
+
+Level 4 - Major ($250K-$1M)
+- Major process failure
+- Significant customer impact
+- Regulatory fine likely
+
+Level 5 - Severe (>$1M)
+- Critical process failure
+- Mass customer defection risk
+- Major regulatory action
+
+4.2 Likelihood Assessment Scale
+
+Level 1 - Rare
+- Less than once in 5 years
+- Probability <10%
+
+Level 2 - Unlikely
+- Once in 2-5 years
+- Probability 10-30%
+
+Level 3 - Possible
+- Once in 1-2 years
+- Probability 30-50%
+
+Level 4 - Likely
+- Multiple times per year
+- Probability 50-80%
+
+Level 5 - Almost Certain
+- Monthly or more frequent
+- Probability >80%
+
+4.3 Risk Rating Matrix
+```
+Likelihood↓ Impact→  1    2    3    4    5
+5                   M    H    H    C    C
+4                   L    M    H    H    C
+3                   L    M    M    H    H
+2                   L    L    M    M    H
+1                   L    L    L    M    M
+
+L=Low, M=Medium, H=High, C=Critical
+```
+
+5. CONTROL DESIGN AND IMPLEMENTATION
+------------------------------------
+5.1 Control Categories
+- Preventive: Stop risks from occurring
+- Detective: Identify when risks occur
+- Corrective: Fix issues after occurrence
+- Compensating: Alternative controls
+
+5.2 Control Design Principles
+1. Match control strength to risk level
+2. Consider cost-benefit analysis
+3. Ensure controls are measurable
+4. Design for sustainability
+5. Include monitoring mechanisms
+6. Document control procedures
+7. Assign clear ownership
+
+5.3 Implementation Steps
+1. Develop control procedure document
+2. Identify required resources
+3. Train control operators
+4. Pilot control if appropriate
+5. Full implementation rollout
+6. Verify control effectiveness
+7. Update risk register
+
+6. KEY RISK INDICATORS (KRIs)
+-----------------------------
+6.1 System Availability KRIs
+- System uptime percentage (Target: >99.5%)
+- Unplanned outages per month (Target: <2)
+- Mean time to recovery (Target: <2 hours)
+- Failed change percentage (Target: <5%)
+
+6.2 Process Efficiency KRIs
+- Error rates by process (Target: <1%)
+- Rework percentage (Target: <3%)
+- SLA breach rate (Target: <5%)
+- Process cycle time variance (Target: <10%)
+
+6.3 Human Resources KRIs
+- Staff turnover rate (Target: <15%)
+- Training completion rate (Target: >95%)
+- Policy violations per month (Target: <5)
+- Overtime percentage (Target: <10%)
+
+6.4 Third-Party KRIs
+- Vendor SLA breaches (Target: <5%)
+- Vendor risk assessments overdue (Target: 0)
+- Critical vendor concentration (Target: <30%)
+- Contract renewals missed (Target: 0)
+
+7. RISK MONITORING PROCEDURES
+-----------------------------
+7.1 Continuous Monitoring
+Real-time Monitoring:
+- System performance dashboards
+- Transaction monitoring
+- Security event monitoring
+- Capacity utilization
+
+Daily Reviews:
+- Overnight processing results
+- Failed transaction reports
+- System alert summaries
+- Incident tickets
+
+7.2 Periodic Reviews
+Weekly:
+- KRI dashboard review
+- Open incident status
+- Control failure analysis
+- Vendor performance
+
+Monthly:
+- Risk register updates
+- Control testing results
+- Loss event analysis
+- Trend analysis
+
+Quarterly:
+- RCSA updates
+- Risk profile changes
+- Control effectiveness
+- Regulatory changes
+
+8. INCIDENT MANAGEMENT PROCEDURES
+---------------------------------
+8.1 Incident Classification
+Severity 1 - Critical
+- Major system outage
+- Data breach
+- Regulatory violation
+- Response time: Immediate
+
+Severity 2 - High
+- Partial system failure
+- Significant process error
+- Customer impacting
+- Response time: 1 hour
+
+Severity 3 - Medium
+- Minor system issues
+- Process inefficiency
+- Internal impact only
+- Response time: 4 hours
+
+Severity 4 - Low
+- Minimal impact
+- Workaround available
+- No urgency
+- Response time: 24 hours
+
+8.2 Incident Response Steps
+1. Detect and log incident
+2. Classify severity level
+3. Notify stakeholders
+4. Assemble response team
+5. Contain immediate impact
+6. Investigate root cause
+7. Implement fix
+8. Verify resolution
+9. Document lessons learned
+10. Update controls if needed
+
+9. BUSINESS CONTINUITY INTERFACE
+--------------------------------
+9.1 Risk Assessment Input
+- Provide operational risk data
+- Identify critical processes
+- Define recovery objectives
+- Document dependencies
+
+9.2 Testing Coordination
+- Participate in BC exercises
+- Validate recovery procedures
+- Update risk assessments
+- Document test results
+
+10. THIRD-PARTY RISK PROCEDURES
+-------------------------------
+10.1 Vendor Risk Assessment
+Initial Assessment:
+1. Collect vendor information
+2. Assess criticality
+3. Review security practices
+4. Check financial stability
+5. Verify compliance status
+6. Document findings
+7. Approve or reject
+
+Ongoing Monitoring:
+- Annual reassessment
+- Performance reviews
+- Incident tracking
+- SLA monitoring
+- Financial health checks
+
+10.2 Contract Requirements
+Mandatory Clauses:
+- Service level agreements
+- Security requirements
+- Audit rights
+- Termination procedures
+- Data protection
+- Insurance requirements
+
+11. TRAINING REQUIREMENTS
+-------------------------
+11.1 Role-Based Training
+All Staff:
+- Operational risk awareness
+- Incident reporting procedures
+- Basic control responsibilities
+
+Risk Champions:
+- Risk assessment techniques
+- Control design principles
+- KRI interpretation
+- Facilitation skills
+
+Management:
+- Risk appetite understanding
+- Decision-making framework
+- Escalation procedures
+- Regulatory requirements
+
+11.2 Training Schedule
+- New employee: Within 30 days
+- Annual refresher: All staff
+- Specialized training: As needed
+- Post-incident training: Within 2 weeks
+
+12. REPORTING PROCEDURES
+------------------------
+12.1 Operational Risk Reports
+
+Daily Flash Report:
+- Critical incidents
+- System availability
+- Failed controls
+- Immediate actions
+
+Weekly Summary:
+- KRI dashboard
+- Incident trends
+- Control testing
+- Risk changes
+
+Monthly Report:
+- Risk profile analysis
+- Loss event summary
+- Control effectiveness
+- Action plan status
+
+Quarterly Report:
+- RCSA results
+- Risk appetite status
+- Regulatory updates
+- Strategic initiatives
+
+12.2 Escalation Thresholds
+Immediate Escalation:
+- Critical incidents
+- Regulatory breaches
+- Losses >$100K
+- Media attention risk
+
+13. TOOLS AND TEMPLATES
+-----------------------
+- Risk Register Template
+- RCSA Workshop Guide
+- Loss Event Form
+- KRI Dashboard Template
+- Incident Report Template
+- Control Testing Checklist
+- Risk Assessment Matrix
+- Monthly Report Template
+
+14. QUALITY ASSURANCE
+---------------------
+14.1 Three Lines of Defense
+First Line:
+- Process owners
+- Control operators
+- Direct management
+
+Second Line:
+- Risk management
+- Compliance
+- Quality assurance
+
+Third Line:
+- Internal audit
+- External audit
+- Regulators
+
+14.2 Review Schedule
+- Procedure review: Annual
+- Template updates: Semi-annual
+- Training materials: Annual
+- System updates: Quarterly
+
+APPENDICES
+----------
+A. Risk Register Template
+B. RCSA Facilitation Guide
+C. Control Testing Procedures
+D. Incident Response Playbooks
+E. Vendor Assessment Checklist
+F. Training Materials
+G. Report Templates
+
+APPROVAL
+--------
+Process Owner: Chief Operating Officer
+Approved by: Executive Committee
+Effective Date: January 5, 2025
+Next Review: January 2026
+
+---END OF DOCUMENT---

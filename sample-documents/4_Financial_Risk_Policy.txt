@@ -1,0 +1,312 @@
+FINANCIAL RISK MANAGEMENT POLICY
+================================
+
+Document Version: 2.1
+Effective Date: January 1, 2025
+Policy Number: FIN-POL-001
+Classification: CONFIDENTIAL
+Review Frequency: Annual
+
+EXECUTIVE SUMMARY
+-----------------
+This Financial Risk Management Policy establishes the framework for identifying, measuring, monitoring, and controlling financial risks across the organization. It ensures prudent risk-taking aligned with our strategic objectives while maintaining financial stability and regulatory compliance.
+
+1. POLICY STATEMENT
+-------------------
+The organization is committed to:
+- Managing financial risks within defined appetite levels
+- Maintaining strong financial controls and governance
+- Protecting shareholder value and stakeholder interests
+- Ensuring compliance with regulatory requirements
+- Promoting a risk-aware culture in financial decisions
+
+2. SCOPE AND APPLICABILITY
+--------------------------
+This policy applies to:
+- All financial transactions and commitments
+- Investment and treasury operations
+- Credit and lending activities
+- Foreign exchange exposures
+- Interest rate management
+- Liquidity management
+- Capital allocation decisions
+
+3. FINANCIAL RISK CATEGORIES
+----------------------------
+3.1 Market Risk
+- Interest rate risk
+- Foreign exchange risk
+- Commodity price risk
+- Equity price risk
+
+3.2 Credit Risk
+- Counterparty default risk
+- Concentration risk
+- Settlement risk
+- Country risk
+
+3.3 Liquidity Risk
+- Funding liquidity risk
+- Market liquidity risk
+- Operational liquidity risk
+
+3.4 Operational Risk
+- Transaction processing errors
+- Fraud and theft
+- System failures
+- Model risk
+
+4. RISK APPETITE FRAMEWORK
+--------------------------
+4.1 Risk Appetite Statements
+- Maximum VaR limit: $10M at 95% confidence level
+- Credit exposure limit: 15% to any single counterparty
+- Liquidity coverage ratio: Minimum 120%
+- Interest rate sensitivity: Maximum 5% of capital
+- Foreign exchange exposure: Maximum 10% of revenue
+
+4.2 Risk Tolerance Levels
+Risk Type         Green        Amber       Red
+Market Risk       <$5M         $5-8M       >$8M
+Credit Loss       <0.5%        0.5-1%      >1%
+Liquidity Ratio   >130%        120-130%    <120%
+Op Loss           <$1M         $1-3M       >$3M
+
+5. GOVERNANCE STRUCTURE
+-----------------------
+5.1 Board of Directors
+- Approve financial risk appetite
+- Review risk policy annually
+- Oversee risk management effectiveness
+
+5.2 Risk Committee
+- Monitor risk exposures monthly
+- Approve risk limit changes
+- Review policy compliance
+
+5.3 Chief Financial Officer
+- Implement risk management framework
+- Ensure adequate resources
+- Report to Board quarterly
+
+5.4 Treasury Department
+- Daily risk monitoring
+- Execute hedging strategies
+- Manage liquidity positions
+
+5.5 Risk Management Function
+- Independent risk assessment
+- Model validation
+- Compliance monitoring
+
+6. MARKET RISK MANAGEMENT
+-------------------------
+6.1 Interest Rate Risk
+Policies:
+- Duration matching for assets/liabilities
+- Maximum duration gap: 2 years
+- Use of interest rate derivatives permitted
+- Quarterly stress testing required
+
+Limits:
+- Modified duration limit: 5 years
+- DV01 limit: $500K
+- Convexity limit: Defined by asset class
+
+6.2 Foreign Exchange Risk
+Policies:
+- Natural hedging preferred
+- Financial hedging for residual exposure
+- Speculation prohibited
+- Monthly mark-to-market reporting
+
+Limits:
+- Net open position: 10% of capital
+- Single currency: 5% of capital
+- Emerging markets: 2% of capital
+
+6.3 Hedging Guidelines
+Permitted Instruments:
+- Forward contracts
+- Currency swaps
+- Interest rate swaps
+- Options (with approval)
+
+Prohibited Activities:
+- Speculative trading
+- Complex derivatives
+- Uncovered positions
+- Leverage beyond limits
+
+7. CREDIT RISK MANAGEMENT
+-------------------------
+7.1 Credit Approval Process
+- Credit committee approval required >$5M
+- Minimum two approvers for all credits
+- Annual review of all exposures
+- Documented credit analysis required
+
+7.2 Counterparty Limits
+Rating      Single Exposure    Aggregate
+AAA         20% of capital     Unlimited
+AA          15% of capital     50% of capital
+A           10% of capital     30% of capital
+BBB         5% of capital      15% of capital
+<BBB        Case by case       5% of capital
+
+7.3 Collateral Management
+- Daily margin calls
+- Acceptable collateral defined
+- Haircuts by asset type
+- Legal documentation required
+
+8. LIQUIDITY RISK MANAGEMENT
+----------------------------
+8.1 Liquidity Requirements
+- Minimum cash balance: $50M
+- Credit facility: $200M (committed)
+- Liquidity coverage ratio: >120%
+- Net stable funding ratio: >100%
+
+8.2 Funding Strategy
+- Diversified funding sources
+- Maturity ladder management
+- Contingency funding plan
+- Regular stress testing
+
+8.3 Early Warning Indicators
+- Daily cash position <$75M
+- Credit spread widening >50bps
+- Rating downgrade watch
+- Significant deposit outflows
+
+9. RISK MEASUREMENT AND MONITORING
+----------------------------------
+9.1 Risk Metrics
+Daily Monitoring:
+- VaR calculation
+- Cash positions
+- FX exposures
+- Counterparty exposures
+
+Weekly Reporting:
+- Interest rate sensitivity
+- Credit exposure summary
+- Liquidity metrics
+- Limit utilization
+
+Monthly Analysis:
+- Stress test results
+- Portfolio analysis
+- Risk-adjusted returns
+- Compliance summary
+
+9.2 Stress Testing
+Scenarios:
+- Interest rate shock (+/- 200bps)
+- Currency devaluation (30%)
+- Credit crisis scenario
+- Liquidity freeze
+- Combined stress scenario
+
+10. RISK MITIGATION STRATEGIES
+------------------------------
+10.1 Diversification
+- Asset class diversification
+- Geographic diversification
+- Maturity diversification
+- Counterparty diversification
+
+10.2 Hedging Program
+- Systematic hedging approach
+- Cost-benefit analysis required
+- Hedge effectiveness testing
+- Documentation requirements
+
+10.3 Insurance
+- Directors & Officers liability
+- Financial institution bond
+- Cyber insurance
+- Professional indemnity
+
+11. COMPLIANCE AND CONTROL
+--------------------------
+11.1 Regulatory Compliance
+- Basel III requirements
+- Dodd-Frank compliance
+- Local regulatory requirements
+- Regular regulatory reporting
+
+11.2 Internal Controls
+- Segregation of duties
+- Independent price verification
+- Model validation
+- Regular internal audits
+
+11.3 Breach Management
+- Immediate escalation required
+- Root cause analysis
+- Remediation plan
+- Board notification if material
+
+12. REPORTING REQUIREMENTS
+--------------------------
+12.1 Management Reports
+- Daily position report
+- Weekly risk dashboard
+- Monthly comprehensive report
+- Quarterly Board report
+
+12.2 Regulatory Reports
+- Call reports (quarterly)
+- FR Y-9C (quarterly)
+- Stress test results (annual)
+- Other required filings
+
+13. TRAINING AND AWARENESS
+--------------------------
+- Annual risk training for all staff
+- Specialized training for risk roles
+- Regular risk awareness communications
+- New employee orientation
+
+14. POLICY EXCEPTIONS
+---------------------
+- Requires CFO approval
+- Documented business rationale
+- Time-limited duration
+- Regular monitoring
+- Board notification if material
+
+15. REVIEW AND UPDATE
+---------------------
+- Annual policy review
+- Update for regulatory changes
+- Incorporate lessons learned
+- Industry best practice review
+- Board approval required
+
+APPENDICES
+----------
+A. Risk Limit Schedule
+B. Approved Counterparty List
+C. Hedging Instrument Guidelines
+D. Stress Test Methodology
+E. Reporting Templates
+F. Escalation Procedures
+
+APPROVAL
+--------
+Policy Owner: Chief Financial Officer
+Approved by: Board of Directors
+Approval Date: December 20, 2024
+Next Review: December 2025
+
+REFERENCES
+----------
+- Basel III Framework
+- COSO Enterprise Risk Management
+- ISO 31000 Risk Management
+- Relevant Regulatory Guidelines
+
+---END OF DOCUMENT---
