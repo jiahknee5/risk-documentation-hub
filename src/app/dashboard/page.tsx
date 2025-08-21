@@ -1,11 +1,13 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { Navigation } from '@/components/Navigation'
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()
+  const router = useRouter()
   const [stats, setStats] = useState({
     totalDocuments: 0,
     recentUploads: 0,
@@ -40,6 +42,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navigation />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
@@ -189,7 +192,9 @@ export default function DashboardPage() {
             </div>
             <div className="p-6">
               <div className="grid grid-cols-1 gap-4">
-                <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors">
+                <button 
+                  onClick={() => router.push('/documents')}
+                  className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                       <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -203,7 +208,9 @@ export default function DashboardPage() {
                   </div>
                 </button>
 
-                <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
+                <button 
+                  onClick={() => router.push('/search')}
+                  className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                       <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
@@ -217,7 +224,9 @@ export default function DashboardPage() {
                   </div>
                 </button>
 
-                <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-colors">
+                <button 
+                  onClick={() => router.push('/audit')}
+                  className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-colors">
                   <div className="flex-shrink-0">
                     <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
                       <svg className="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
@@ -226,8 +235,8 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="ml-4 text-left">
-                    <p className="text-sm font-medium text-gray-900">Generate Report</p>
-                    <p className="text-xs text-gray-500">Create compliance report</p>
+                    <p className="text-sm font-medium text-gray-900">View Audit Trail</p>
+                    <p className="text-xs text-gray-500">Review system activity</p>
                   </div>
                 </button>
               </div>
