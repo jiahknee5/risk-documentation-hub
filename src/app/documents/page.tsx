@@ -78,6 +78,24 @@ function DocumentsContent() {
         })
       }
       
+      // If still failing, try auto-upload
+      if (!response.ok) {
+        console.log('Failsafe upload failed, trying auto-upload endpoint')
+        response = await fetch('/api/auto-upload', {
+          method: 'POST',
+          body: formData
+        })
+      }
+      
+      // Last resort: no-database upload
+      if (!response.ok) {
+        console.log('All database uploads failed, trying no-database endpoint')
+        response = await fetch('/api/no-db-upload', {
+          method: 'POST',
+          body: formData
+        })
+      }
+      
       if (response.ok) {
         const result = await response.json()
         console.log('Upload successful:', result)
