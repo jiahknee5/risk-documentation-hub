@@ -69,6 +69,15 @@ function DocumentsContent() {
         })
       }
       
+      // If still failing, try failsafe upload
+      if (!response.ok) {
+        console.log('Simple upload failed, trying failsafe upload endpoint')
+        response = await fetch('/api/documents/failsafe-upload', {
+          method: 'POST',
+          body: formData
+        })
+      }
+      
       if (response.ok) {
         const result = await response.json()
         console.log('Upload successful:', result)

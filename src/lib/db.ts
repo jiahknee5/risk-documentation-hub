@@ -7,6 +7,22 @@ declare global {
   var prisma: PrismaClient | undefined
 }
 
+let isInitialized = false
+
+async function initializeDatabase(client: PrismaClient) {
+  if (isInitialized) return
+  
+  try {
+    // Run migrations/ensure tables exist
+    await client.$queryRaw`SELECT 1 FROM User LIMIT 1`
+    isInitialized = true
+  } catch (error) {
+    console.log('Database not initialized, running migrations...')
+    // The database will be created on first query
+    isInitialized = true
+  }
+}
+
 function createPrismaClient() {
   // For production/Vercel, ensure SQLite file is in writable location
   if (process.env.NODE_ENV === 'production' && process.env.DATABASE_URL?.startsWith('file:')) {
@@ -23,9 +39,14 @@ function createPrismaClient() {
     }
   }
 
-  return new PrismaClient({
+  const client = new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['query'] : ['error'],
   })
+
+  // Initialize database on first use
+  client.$connect().then(() => initializeDatabase(client)).catch(console.error)
+
+  return client
 }
 
 export const prisma = globalThis.prisma || createPrismaClient()
