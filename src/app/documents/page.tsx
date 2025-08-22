@@ -126,7 +126,15 @@ function DocumentsContent() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await fetch('/api/documents')
+      // Try the main documents endpoint first
+      let response = await fetch('/api/documents')
+      
+      // If that fails, try the simpler list endpoint
+      if (!response.ok) {
+        console.log('Main documents endpoint failed, trying list endpoint')
+        response = await fetch('/api/documents/list')
+      }
+      
       if (response.ok) {
         const data = await response.json()
         // Handle both paginated and non-paginated responses
@@ -140,7 +148,19 @@ function DocumentsContent() {
         }
       } else {
         console.error('Failed to fetch documents:', response.status)
-        setDocuments([])
+        // Try to get from no-db endpoint as last resort
+        try {
+          const noDbResponse = await fetch('/api/no-db-upload')
+          if (noDbResponse.ok) {
+            const noDbData = await noDbResponse.json()
+            if (noDbData.documents) {
+              console.log('Using in-memory documents')
+              setDocuments(noDbData.documents)
+            }
+          }
+        } catch (e) {
+          console.error('No-db fetch failed:', e)
+        }
       }
     } catch (error) {
       console.error('Error fetching documents:', error)
