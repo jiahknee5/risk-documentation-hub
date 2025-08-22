@@ -2,11 +2,19 @@
 
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import { Navigation } from '@/components/Navigation'
+import { AuthCheck } from '@/components/AuthCheck'
 
 export default function SearchPage() {
-  const { data: session, status } = useSession()
+  return (
+    <AuthCheck>
+      <SearchContent />
+    </AuthCheck>
+  )
+}
+
+function SearchContent() {
+  const { data: session } = useSession()
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isSearching, setIsSearching] = useState(false)
@@ -15,14 +23,6 @@ export default function SearchPage() {
     dateRange: '',
     fileType: ''
   })
-
-  if (status === 'loading') {
-    return <div className="flex justify-center items-center min-h-screen">Loading...</div>
-  }
-
-  if (status === 'unauthenticated') {
-    redirect('/auth/signin')
-  }
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()

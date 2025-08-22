@@ -1,12 +1,21 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { Navigation } from '@/components/Navigation'
+import { AuthCheck } from '@/components/AuthCheck'
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession()
+  return (
+    <AuthCheck>
+      <DashboardContent />
+    </AuthCheck>
+  )
+}
+
+function DashboardContent() {
+  const { data: session } = useSession()
   const router = useRouter()
   const [stats, setStats] = useState({
     totalDocuments: 0,
@@ -14,14 +23,6 @@ export default function DashboardPage() {
     pendingReviews: 0,
     compliance: 95
   })
-
-  if (status === 'loading') {
-    return <div className="flex justify-center items-center min-h-screen">Loading...</div>
-  }
-
-  if (status === 'unauthenticated') {
-    redirect('/auth/signin')
-  }
 
   useEffect(() => {
     // Fetch dashboard stats

@@ -2,11 +2,19 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import { Navigation } from '@/components/Navigation'
+import { AuthCheck } from '@/components/AuthCheck'
 
 export default function UsersPage() {
-  const { data: session, status } = useSession()
+  return (
+    <AuthCheck>
+      <UsersContent />
+    </AuthCheck>
+  )
+}
+
+function UsersContent() {
+  const { data: session } = useSession()
   const [users, setUsers] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [showAddUser, setShowAddUser] = useState(false)
@@ -16,14 +24,6 @@ export default function UsersPage() {
     role: 'USER',
     department: ''
   })
-
-  if (status === 'loading') {
-    return <div className="flex justify-center items-center min-h-screen">Loading...</div>
-  }
-
-  if (status === 'unauthenticated') {
-    redirect('/auth/signin')
-  }
 
   // Check if user has admin permissions
   if (session?.user?.role !== 'ADMIN') {

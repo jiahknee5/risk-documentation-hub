@@ -58,6 +58,10 @@ export function generateDocumentId(): string {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
+export function generateId(): string {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
 export function sanitizeFilename(filename: string): string {
   return filename.replace(/[^a-z0-9.-]/gi, '_').toLowerCase()
 }

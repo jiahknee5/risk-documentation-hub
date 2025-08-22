@@ -1,23 +1,24 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 export default function Home() {
   const { data: session, status } = useSession()
+  const router = useRouter()
   
   useEffect(() => {
     if (status === 'loading') return // Still loading
     
     if (session) {
       // User is logged in, redirect to dashboard
-      redirect('/dashboard')
+      router.push('/dashboard')
     } else {
       // User is not logged in, redirect to signin
-      redirect('/auth/signin')
+      router.push('/auth/signin')
     }
-  }, [session, status])
+  }, [session, status, router])
 
   // Show loading while checking session
   return (

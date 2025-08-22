@@ -2,11 +2,19 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import { Navigation } from '@/components/Navigation'
+import { AuthCheck } from '@/components/AuthCheck'
 
 export default function AuditPage() {
-  const { data: session, status } = useSession()
+  return (
+    <AuthCheck>
+      <AuditContent />
+    </AuthCheck>
+  )
+}
+
+function AuditContent() {
+  const { data: session } = useSession()
   const [auditLogs, setAuditLogs] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState({
@@ -15,14 +23,6 @@ export default function AuditPage() {
     dateRange: 'week',
     category: ''
   })
-
-  if (status === 'loading') {
-    return <div className="flex justify-center items-center min-h-screen">Loading...</div>
-  }
-
-  if (status === 'unauthenticated') {
-    redirect('/auth/signin')
-  }
 
   useEffect(() => {
     fetchAuditLogs()
