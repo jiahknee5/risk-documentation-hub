@@ -2,8 +2,25 @@
   "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm ci",
+  "framework": "nextjs",
   "env": {
     "NEXTAUTH_URL": "https://risk.johnnycchung.com",
     "DATABASE_URL": "file:/tmp/data.db"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "file:/tmp/data.db"
+    }
+  },
+  "functions": {
+    "src/app/api/documents/upload/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/documents/simple-upload/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/documents/failsafe-upload/route.ts": {
+      "maxDuration": 60
+    }
   }
 }
