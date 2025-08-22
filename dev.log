@@ -190,3 +190,13 @@
  ✓ Compiled middleware in 0ms
  ✓ Compiled middleware in 0ms
  ✓ Compiled middleware in 0ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.4.6 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.159:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Compiled middleware in 66ms
+ ✓ Ready in 1016ms
+ ✓ Compiled middleware in 0ms

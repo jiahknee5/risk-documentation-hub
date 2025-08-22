@@ -43,8 +43,10 @@ function createPrismaClient() {
     log: process.env.NODE_ENV === 'development' ? ['query'] : ['error'],
   })
 
-  // Initialize database on first use
-  client.$connect().then(() => initializeDatabase(client)).catch(console.error)
+  // Initialize database on first use (skip during build)
+  if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    client.$connect().then(() => initializeDatabase(client)).catch(console.error)
+  }
 
   return client
 }
