@@ -75,8 +75,9 @@ function DocumentsContent() {
         // Refresh documents list
         fetchDocuments()
       } else {
-        console.error('Upload failed:', response.statusText)
-        alert('Upload failed. Please try again.')
+        const errorData = await response.json()
+        console.error('Upload failed:', response.status, errorData)
+        alert(`Upload failed: ${errorData.error || response.statusText}`)
       }
     } catch (error) {
       console.error('Upload error:', error)

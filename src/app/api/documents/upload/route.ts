@@ -5,21 +5,45 @@ import { prisma } from '@/lib/db'
 import { generateId } from '@/lib/utils'
 
 export async function POST(request: NextRequest) {
+  console.log('Upload endpoint called')
+  
   try {
+    // Check session
     const session = await getServerSession(authOptions)
+    console.log('Session:', session ? 'exists' : 'missing')
+    
     if (!session?.user) {
+      console.log('No authenticated user')
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const formData = await request.formData()
+    // Parse form data
+    let formData
+    try {
+      formData = await request.formData()
+    } catch (parseError) {
+      console.error('Failed to parse form data:', parseError)
+      return NextResponse.json({ error: 'Invalid form data' }, { status: 400 })
+    }
+
     const file = formData.get('file') as File
-    const title = formData.get('title') as string || file.name
+    const title = formData.get('title') as string || file?.name || 'Untitled'
     const description = formData.get('description') as string || ''
     const category = formData.get('category') as string || 'OTHER'
     const riskLevel = formData.get('riskLevel') as string || 'MEDIUM'
     const tags = formData.get('tags') as string || ''
 
+    console.log('Upload details:', {
+      fileName: file?.name,
+      fileSize: file?.size,
+      fileType: file?.type,
+      title,
+      category,
+      riskLevel
+    })
+
     if (!file) {
+      console.log('No file in form data')
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
 
@@ -64,8 +88,23 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error creating document:', error)
+    
+    // Provide more detailed error message
+    let errorMessage = 'Failed to create document'
+    if (error instanceof Error) {
+      errorMessage = error.message
+      console.error('Error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      })
+    }
+    
     return NextResponse.json(
-      { error: 'Failed to create document' },
+      { 
+        error: errorMessage,
+        details: process.env.NODE_ENV === 'development' ? error : undefined
+      },
       { status: 500 }
     )
   }
