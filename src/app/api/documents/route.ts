@@ -68,20 +68,28 @@ export async function GET(request: NextRequest) {
       prisma.document.count({ where })
     ])
 
-    // Log search activity
-    await prisma.auditLog.create({
-      data: {
-        userId: session.user.id,
-        action: 'SEARCH_PERFORMED',
-        details: JSON.stringify({
-          search,
-          filters: { category, riskLevel, complianceStatus },
-          resultsCount: documents.length
-        }),
-        ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
-        userAgent: request.headers.get('user-agent') || 'unknown'
+    // Log search activity (only if there was an actual search)
+    if (search || category || riskLevel || complianceStatus) {
+      try {
+        await prisma.auditLog.create({
+          data: {
+            id: `audit-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            userId: session.user.id,
+            action: 'SEARCH_PERFORMED',
+            details: JSON.stringify({
+              search,
+              filters: { category, riskLevel, complianceStatus },
+              resultsCount: documents.length
+            }),
+            ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
+            userAgent: request.headers.get('user-agent') || 'unknown'
+          }
+        })
+      } catch (auditError) {
+        console.error('Failed to create audit log:', auditError)
+        // Continue without failing the request
       }
-    })
+    }
 
     return NextResponse.json({
       documents,
@@ -158,21 +166,27 @@ export async function POST(request: NextRequest) {
     })
 
     // Log document creation
-    await prisma.auditLog.create({
-      data: {
-        userId: session.user.id,
-        documentId: document.id,
-        action: 'DOCUMENT_UPLOAD',
-        details: JSON.stringify({
-          title,
-          category,
-          riskLevel,
-          fileSize
-        }),
-        ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
-        userAgent: request.headers.get('user-agent') || 'unknown'
-      }
-    })
+    try {
+      await prisma.auditLog.create({
+        data: {
+          id: `audit-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          userId: session.user.id,
+          documentId: document.id,
+          action: 'DOCUMENT_UPLOAD',
+          details: JSON.stringify({
+            title,
+            category,
+            riskLevel,
+            fileSize
+          }),
+          ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
+          userAgent: request.headers.get('user-agent') || 'unknown'
+        }
+      })
+    } catch (auditError) {
+      console.error('Failed to create audit log:', auditError)
+      // Continue without failing the request
+    }
 
     return NextResponse.json(document, { status: 201 })
   } catch (error) {

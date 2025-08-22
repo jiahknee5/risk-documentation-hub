@@ -54,10 +54,20 @@ function DocumentsContent() {
     formData.append('tags', uploadForm.tags)
     
     try {
-      const response = await fetch('/api/documents/upload', {
+      // Try the main upload endpoint first
+      let response = await fetch('/api/documents/upload', {
         method: 'POST',
         body: formData
       })
+      
+      // If main endpoint fails, try simple upload
+      if (!response.ok && response.status >= 500) {
+        console.log('Main upload failed, trying simple upload endpoint')
+        response = await fetch('/api/documents/simple-upload', {
+          method: 'POST',
+          body: formData
+        })
+      }
       
       if (response.ok) {
         const result = await response.json()
@@ -91,11 +101,23 @@ function DocumentsContent() {
     try {
       const response = await fetch('/api/documents')
       if (response.ok) {
-        const docs = await response.json()
-        setDocuments(docs)
+        const data = await response.json()
+        // Handle both paginated and non-paginated responses
+        if (Array.isArray(data)) {
+          setDocuments(data)
+        } else if (data.documents && Array.isArray(data.documents)) {
+          setDocuments(data.documents)
+        } else {
+          console.warn('Unexpected response format:', data)
+          setDocuments([])
+        }
+      } else {
+        console.error('Failed to fetch documents:', response.status)
+        setDocuments([])
       }
     } catch (error) {
       console.error('Error fetching documents:', error)
+      setDocuments([])
     }
   }
 
@@ -210,7 +232,7 @@ function DocumentsContent() {
                         {new Date(doc.createdAt).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {(doc.fileSize / 1024).toFixed(1)} KB
+                        {doc.fileSize ? `${(doc.fileSize / 1024).toFixed(1)} KB` : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button className="text-blue-600 hover:text-blue-900 mr-4">View</button>
