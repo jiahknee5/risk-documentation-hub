@@ -112,8 +112,13 @@ function DocumentsContent() {
           riskLevel: 'MEDIUM',
           tags: ''
         })
-        // Refresh documents list
+        // Refresh documents list immediately and with a delay
         fetchDocuments()
+        // Also refresh after a short delay in case of async processing
+        setTimeout(() => {
+          console.log('Refreshing documents after delay...')
+          fetchDocuments()
+        }, 1000)
       } else {
         const errorData = await response.json()
         console.error('Upload failed:', response.status, errorData)
@@ -129,8 +134,22 @@ function DocumentsContent() {
 
   const fetchDocuments = async () => {
     try {
-      // Try the main documents endpoint first
-      let response = await fetch('/api/documents')
+      // First try debug endpoint to see what's in the database
+      console.log('Fetching documents...')
+      let response = await fetch('/api/documents/debug-list')
+      
+      if (response.ok) {
+        const debugData = await response.json()
+        console.log('Debug data:', debugData.debug)
+        
+        if (debugData.documents && debugData.documents.length > 0) {
+          setDocuments(debugData.documents)
+          return
+        }
+      }
+      
+      // Try the main documents endpoint
+      response = await fetch('/api/documents')
       
       // If that fails, try the simpler list endpoint
       if (!response.ok) {
@@ -151,6 +170,8 @@ function DocumentsContent() {
         }
       } else {
         console.error('Failed to fetch documents:', response.status)
+        const errorText = await response.text()
+        console.error('Error response:', errorText)
         // Try to get from no-db endpoint as last resort
         try {
           const noDbResponse = await fetch('/api/no-db-upload')
