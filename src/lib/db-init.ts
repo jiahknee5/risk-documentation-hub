@@ -26,32 +26,29 @@ export async function ensureDatabase() {
         "id" TEXT NOT NULL PRIMARY KEY,
         "title" TEXT NOT NULL,
         "description" TEXT,
-        "filename" TEXT NOT NULL,
-        "filepath" TEXT NOT NULL,
-        "filesize" INTEGER NOT NULL,
-        "mimetype" TEXT NOT NULL,
+        "fileName" TEXT NOT NULL,
+        "filePath" TEXT NOT NULL,
+        "fileSize" INTEGER NOT NULL,
+        "mimeType" TEXT NOT NULL,
         "category" TEXT NOT NULL,
+        "riskLevel" TEXT NOT NULL DEFAULT 'MEDIUM',
         "tags" TEXT,
-        "uploadedById" TEXT NOT NULL,
+        "uploadedBy" TEXT NOT NULL,
         "isActive" BOOLEAN NOT NULL DEFAULT true,
         "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY ("uploadedById") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE
+        FOREIGN KEY ("uploadedBy") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE
       )`
       
       // Create audit logs table
-      await prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "audit_logs" (
+      await prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "auditLogs" (
         "id" TEXT NOT NULL PRIMARY KEY,
         "action" TEXT NOT NULL,
-        "resource" TEXT,
-        "details" TEXT,
-        "category" TEXT NOT NULL,
+        "entityType" TEXT NOT NULL,
+        "entityId" TEXT NOT NULL,
         "userId" TEXT NOT NULL,
-        "userEmail" TEXT NOT NULL,
-        "userName" TEXT,
-        "ipAddress" TEXT,
-        "userAgent" TEXT,
-        "timestamp" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "metadata" TEXT,
+        "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE
       )`
       
@@ -71,14 +68,15 @@ export async function ensureDatabase() {
     console.log('🌱 Initializing database with demo users...')
     
     // Create demo users
-    const hashedPassword = await bcryptjs.hash('password123', 10)
+    const demoPassword = await bcryptjs.hash('demo123', 10)
+    const adminPassword = await bcryptjs.hash('admin123', 10)
     
     // Create users using raw SQL to avoid Prisma issues
     const users = [
-      ['admin-001', 'admin@example.com', 'System Admin', hashedPassword, 'ADMIN', 'IT'],
-      ['manager-002', 'manager@example.com', 'Risk Manager', hashedPassword, 'MANAGER', 'Risk Management'],
-      ['user-003', 'user@example.com', 'John User', hashedPassword, 'USER', 'Operations'],
-      ['viewer-004', 'viewer@example.com', 'Jane Viewer', hashedPassword, 'VIEWER', 'Compliance']
+      ['demo-001', 'demo@riskdocs.com', 'Demo User', demoPassword, 'USER', 'Risk Management'],
+      ['admin-002', 'admin@riskdocs.com', 'Admin User', adminPassword, 'ADMIN', 'IT Administration'],
+      ['manager-003', 'manager@riskdocs.com', 'Risk Manager', demoPassword, 'MANAGER', 'Risk Management'],
+      ['viewer-004', 'viewer@riskdocs.com', 'Jane Viewer', demoPassword, 'VIEWER', 'Compliance']
     ]
 
     for (const [id, email, name, password, role, department] of users) {

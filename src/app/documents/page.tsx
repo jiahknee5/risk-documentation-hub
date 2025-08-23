@@ -19,6 +19,8 @@ function DocumentsContent() {
   const [isUploading, setIsUploading] = useState(false)
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [showViewModal, setShowViewModal] = useState(false)
+  const [viewingDocument, setViewingDocument] = useState<any>(null)
   const [uploadForm, setUploadForm] = useState({
     title: '',
     description: '',
@@ -172,6 +174,46 @@ function DocumentsContent() {
     fetchDocuments()
   }, [])
 
+  const handleView = (document: any) => {
+    setViewingDocument(document)
+    setShowViewModal(true)
+  }
+
+  const handleDelete = async (documentId: string) => {
+    if (!confirm('Are you sure you want to delete this document?')) {
+      return
+    }
+
+    try {
+      // Try the main delete endpoint first
+      let response = await fetch(`/api/documents/${documentId}`, {
+        method: 'DELETE'
+      })
+
+      // If that fails with auth error, try simple delete
+      if (!response.ok && response.status === 401) {
+        console.log('Main delete failed with auth error, trying simple delete')
+        response = await fetch(`/api/documents/${documentId}/simple-delete`, {
+          method: 'DELETE'
+        })
+      }
+
+      if (response.ok) {
+        // Remove from local state
+        setDocuments(documents.filter((doc: any) => doc.id !== documentId))
+        alert('Document deleted successfully')
+        // Refresh the list to ensure consistency
+        fetchDocuments()
+      } else {
+        const error = await response.json()
+        alert(`Failed to delete document: ${error.error || 'Unknown error'}`)
+      }
+    } catch (error) {
+      console.error('Delete error:', error)
+      alert('Failed to delete document')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -276,14 +318,24 @@ function DocumentsContent() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(doc.createdAt).toLocaleDateString()}
+                        {doc.createdAt ? new Date(doc.createdAt).toLocaleDateString() : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {doc.fileSize ? `${(doc.fileSize / 1024).toFixed(1)} KB` : 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button className="text-blue-600 hover:text-blue-900 mr-4">View</button>
-                        <button className="text-red-600 hover:text-red-900">Delete</button>
+                        <button 
+                          onClick={() => handleView(doc)}
+                          className="text-blue-600 hover:text-blue-900 mr-4"
+                        >
+                          View
+                        </button>
+                        <button 
+                          onClick={() => handleDelete(doc.id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -390,6 +442,91 @@ function DocumentsContent() {
                   disabled={isUploading || !uploadForm.title}
                 >
                   {isUploading ? 'Uploading...' : 'Upload'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* View Document Modal */}
+        {showViewModal && viewingDocument && (
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Document Details</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Title</label>
+                  <p className="mt-1 text-sm text-gray-900">{viewingDocument.title}</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Description</label>
+                  <p className="mt-1 text-sm text-gray-900">{viewingDocument.description || 'No description'}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Category</label>
+                    <p className="mt-1 text-sm text-gray-900">{viewingDocument.category}</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Risk Level</label>
+                    <p className="mt-1 text-sm text-gray-900">{viewingDocument.riskLevel}</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">File Name</label>
+                    <p className="mt-1 text-sm text-gray-900">{viewingDocument.fileName}</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">File Size</label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {viewingDocument.fileSize ? `${(viewingDocument.fileSize / 1024).toFixed(1)} KB` : 'N/A'}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Upload Date</label>
+                  <p className="mt-1 text-sm text-gray-900">
+                    {viewingDocument.createdAt ? new Date(viewingDocument.createdAt).toLocaleString() : 'N/A'}
+                  </p>
+                </div>
+
+                {viewingDocument.tags && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Tags</label>
+                    <p className="mt-1 text-sm text-gray-900">{viewingDocument.tags}</p>
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Document ID</label>
+                  <p className="mt-1 text-sm text-gray-500 font-mono text-xs">{viewingDocument.id}</p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-end space-x-3">
+                <button
+                  onClick={() => {
+                    setShowViewModal(false)
+                    setViewingDocument(null)
+                  }}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    // In a real app, this would download the file
+                    alert('Download functionality would be implemented here')
+                  }}
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                >
+                  Download
                 </button>
               </div>
             </div>

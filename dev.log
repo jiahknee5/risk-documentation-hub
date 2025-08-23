@@ -205,3 +205,625 @@
  ✓ Compiled middleware in 3ms
  ✓ Compiled middleware in 1ms
  ✓ Compiled middleware in 0ms
+ ○ Compiling /api/debug/documents ...
+ ✓ Compiled /api/debug/documents in 665ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ziwoz064t5c'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ziwoz064t5c'
+}
+ ✓ Compiled /_error in 482ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.1oifi9pe0ci'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.1oifi9pe0ci'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ziwoz064t5c'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ziwoz064t5c'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.7izmywau2is'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.7izmywau2is'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.2kl7rnu31rm'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.2kl7rnu31rm'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6lw5wiime1l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6lw5wiime1l'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.3yp21r05nwf'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.3yp21r05nwf'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6lw5wiime1l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6lw5wiime1l'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ti964emhmbb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ti964emhmbb'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.nk8w4g9rbtf'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.nk8w4g9rbtf'
+}
+ ✓ Compiled middleware in 1ms
+ ✓ Compiled middleware in 1ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1105ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tzhdibe94d'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tzhdibe94d'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.2x3od3mi5ke'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.2x3od3mi5ke'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tzhdibe94d'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tzhdibe94d'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fb2syvxog5m'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fb2syvxog5m'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tt1onsl5kn'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tt1onsl5kn'
+}
+ ✓ Compiled /api/auth/[...nextauth] in 149ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.w8263kbbwb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.w8263kbbwb'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.7tt9w0v5oi9'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.7tt9w0v5oi9'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.w8263kbbwb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.w8263kbbwb'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.3ys1xvpmwh1'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.3ys1xvpmwh1'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.l1vdgv8ea1r'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.l1vdgv8ea1r'
+}
+[Middleware] Upload request: POST /api/documents/upload
+[Middleware] Headers: {
+  connection: 'keep-alive',
+  content-length: '0',
+  host: 'localhost:3000',
+  x-forwarded-for: '::1',
+  x-forwarded-host: 'localhost:3000',
+  x-forwarded-port: '3000',
+  x-forwarded-proto: 'http'
+}
+ ✓ Compiled /api/documents/upload in 147ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ylyunsde1l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ylyunsde1l'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.1n74goeg1vp'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.1n74goeg1vp'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ylyunsde1l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ylyunsde1l'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ctb7i2ellkr'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ctb7i2ellkr'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.h4j8wfhdslm'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.h4j8wfhdslm'
+}
+ ✓ Compiled /api/documents/failsafe-upload in 51ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8loso33s7un'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8loso33s7un'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.jv9jcntlhas'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.jv9jcntlhas'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8loso33s7un'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8loso33s7un'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.0priupjgc98f'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.0priupjgc98f'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.h6qttqj8i4o'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.h6qttqj8i4o'
+}
+ ✓ Compiled /api/no-db-upload in 44ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tmubix6r76'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tmubix6r76'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.iks1dmf14w'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.iks1dmf14w'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tmubix6r76'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tmubix6r76'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.54yk6zr5dvh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.54yk6zr5dvh'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.jxubdwn3gln'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.jxubdwn3gln'
+}
+ ✓ Compiled /api/documents/list in 43ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dzqj5h8wmi'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dzqj5h8wmi'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8s3b8z3wbd8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8s3b8z3wbd8'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dzqj5h8wmi'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dzqj5h8wmi'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6t1zqpowyfh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6t1zqpowyfh'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.vy7pfhew6v'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.vy7pfhew6v'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ajrtm6frqh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ajrtm6frqh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.azgl5ir22wq'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.azgl5ir22wq'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ajrtm6frqh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ajrtm6frqh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.xtnetvuysuh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.xtnetvuysuh'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.bucypvh3pgs'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.bucypvh3pgs'
+}
+ ✓ Compiled /dashboard in 199ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.kbbotdq96ej'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.kbbotdq96ej'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.inyjrxht20o'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.inyjrxht20o'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.kbbotdq96ej'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.kbbotdq96ej'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.5yo6updh1z'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.5yo6updh1z'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.cgz869vjub'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.cgz869vjub'
+}
+ ✓ Compiled /documents in 158ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.flx5n8piam'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.flx5n8piam'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6wbtu9l57e7'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6wbtu9l57e7'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.flx5n8piam'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.flx5n8piam'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ntpgqffb95'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ntpgqffb95'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.d5ekil6ifd'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.d5ekil6ifd'
+}
+ ✓ Compiled /auth/signin in 202ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.gjawohwhokh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.gjawohwhokh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dtx5x6s97io'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dtx5x6s97io'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.gjawohwhokh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.gjawohwhokh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.vosepy2kbb'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.vosepy2kbb'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6n27fi8sh3'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6n27fi8sh3'
+}
+ ✓ Compiled /_not-found/page in 104ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.sqijz1t0uw8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.sqijz1t0uw8'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fwg3dkaqm1l'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fwg3dkaqm1l'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.yut8q2nykke'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.yut8q2nykke'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ivc7tmcu9vr'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ivc7tmcu9vr'
+}
+[Middleware] Upload request: POST /api/documents/upload
+[Middleware] Headers: {
+  connection: 'keep-alive',
+  content-type: 'application/json',
+  host: 'localhost:3000',
+  transfer-encoding: 'chunked',
+  x-forwarded-for: '::1',
+  x-forwarded-host: 'localhost:3000',
+  x-forwarded-port: '3000',
+  x-forwarded-proto: 'http'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6e5wu37q5d5'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6e5wu37q5d5'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.gxmc5yq6ysh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.gxmc5yq6ysh'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6e5wu37q5d5'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.6e5wu37q5d5'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.uk16km5ozj'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.uk16km5ozj'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8nfe53icc3n'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.8nfe53icc3n'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.589jzued55u'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.589jzued55u'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.mw8egclby1a'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.mw8egclby1a'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.589jzued55u'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.589jzued55u'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.k89hbt0jzcl'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.k89hbt0jzcl'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fd4mw12ayn'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fd4mw12ayn'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dqeem320nh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dqeem320nh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.0h8tmg8k0w9w'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.0h8tmg8k0w9w'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dqeem320nh'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.dqeem320nh'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ku2d6kwly8m'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.ku2d6kwly8m'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.d9mwydgjr7q'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.d9mwydgjr7q'
+}
+ ✓ Compiled /api/seed-db in 53ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fivhsk48hr8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fivhsk48hr8'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tjjfbdgc6jm'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.tjjfbdgc6jm'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fivhsk48hr8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.fivhsk48hr8'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.msoss9usu7'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.msoss9usu7'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.v6hghvvyx1c'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.v6hghvvyx1c'
+}
+ ✓ Compiled /test-suite in 150ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.it5ffmrrwfr'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.it5ffmrrwfr'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.knzu2mcvnqa'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.knzu2mcvnqa'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.it5ffmrrwfr'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.it5ffmrrwfr'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.h5gkaqte2t8'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.h5gkaqte2t8'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.9ujh3oc7yd4'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.9ujh3oc7yd4'
+}
+ ✓ Compiled /favicon.ico in 62ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.jq5c7y9i3n'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.jq5c7y9i3n'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.beuyqf089kt'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.beuyqf089kt'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.mhd9g65fcbo'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.mhd9g65fcbo'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.beuyqf089kt'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.beuyqf089kt'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.cnxgtelefrl'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.cnxgtelefrl'
+}
+[Error: ENOENT: no such file or directory, open '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.75141u7ao6e'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Volumes/project_chimera/projects/risk-documentation-hub/.next/static/development/_buildManifest.js.tmp.75141u7ao6e'
+}
+ ✓ Compiled middleware in 0ms
+ ✓ Compiled middleware in 0ms
+ ✓ Compiled middleware in 0ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.4.6 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.159:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Compiled middleware in 70ms
+ ✓ Ready in 997ms
