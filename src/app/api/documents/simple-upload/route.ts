@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 import { generateId } from '@/lib/utils'
+import { reinitializeRAG } from '@/app/api/rag/vercel-search/route'
 
 export async function POST(request: NextRequest) {
   console.log('Simple upload endpoint called')
@@ -71,6 +72,13 @@ export async function POST(request: NextRequest) {
     })
 
     console.log('Document created:', document.id)
+
+    // Re-initialize RAG with new document
+    try {
+      await reinitializeRAG()
+    } catch (ragError) {
+      console.error('Failed to reinitialize RAG:', ragError)
+    }
 
     return NextResponse.json({
       success: true,

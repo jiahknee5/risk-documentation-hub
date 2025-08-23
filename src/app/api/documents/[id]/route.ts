@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/db'
 import { authOptions } from '@/lib/auth'
+import { reinitializeRAG } from '@/app/api/rag/vercel-search/route'
 
 // GET /api/documents/[id] - Get single document
 export async function GET(
@@ -160,6 +161,13 @@ export async function PUT(
       }
     })
 
+    // Re-initialize RAG after update
+    try {
+      await reinitializeRAG()
+    } catch (ragError) {
+      console.error('Failed to reinitialize RAG after update:', ragError)
+    }
+
     return NextResponse.json(document)
   } catch (error) {
     console.error('Error updating document:', error)
@@ -219,6 +227,13 @@ export async function DELETE(
         userAgent: request.headers.get('user-agent') || 'unknown'
       }
     })
+
+    // Re-initialize RAG after deletion
+    try {
+      await reinitializeRAG()
+    } catch (ragError) {
+      console.error('Failed to reinitialize RAG after deletion:', ragError)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
