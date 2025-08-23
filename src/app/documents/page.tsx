@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { Navigation } from '@/components/Navigation'
 import { AuthCheck } from '@/components/AuthCheck'
+import { Input, Textarea, Select } from '@/components/Input'
 
 export default function DocumentsPage() {
   return (
@@ -357,72 +358,57 @@ function DocumentsContent() {
                   <p className="text-sm text-gray-600">{selectedFile?.name}</p>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                  <input
-                    type="text"
-                    value={uploadForm.title}
-                    onChange={(e) => setUploadForm(prev => ({ ...prev, title: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Document title"
-                  />
-                </div>
+                <Input
+                  label="Title"
+                  type="text"
+                  value={uploadForm.title}
+                  onChange={(e) => setUploadForm(prev => ({ ...prev, title: e.target.value }))}
+                  placeholder="Document title"
+                />
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                  <textarea
-                    value={uploadForm.description}
-                    onChange={(e) => setUploadForm(prev => ({ ...prev, description: e.target.value }))}
-                    rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Brief description of the document"
-                  />
-                </div>
+                <Textarea
+                  label="Description"
+                  value={uploadForm.description}
+                  onChange={(e) => setUploadForm(prev => ({ ...prev, description: e.target.value }))}
+                  rows={3}
+                  placeholder="Brief description of the document"
+                />
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                  <select
-                    value={uploadForm.category}
-                    onChange={(e) => setUploadForm(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="COMPLIANCE">Compliance</option>
-                    <option value="OPERATIONAL_RISK">Operational Risk</option>
-                    <option value="FINANCIAL_RISK">Financial Risk</option>
-                    <option value="CYBERSECURITY">Cybersecurity</option>
-                    <option value="REGULATORY">Regulatory</option>
-                    <option value="POLICY">Policy</option>
-                    <option value="PROCEDURE">Procedure</option>
-                    <option value="ASSESSMENT">Assessment</option>
-                    <option value="REPORT">Report</option>
-                    <option value="OTHER">Other</option>
-                  </select>
-                </div>
+                <Select
+                  label="Category"
+                  value={uploadForm.category}
+                  onChange={(e) => setUploadForm(prev => ({ ...prev, category: e.target.value }))}
+                >
+                  <option value="COMPLIANCE">Compliance</option>
+                  <option value="OPERATIONAL_RISK">Operational Risk</option>
+                  <option value="FINANCIAL_RISK">Financial Risk</option>
+                  <option value="CYBERSECURITY">Cybersecurity</option>
+                  <option value="REGULATORY">Regulatory</option>
+                  <option value="POLICY">Policy</option>
+                  <option value="PROCEDURE">Procedure</option>
+                  <option value="ASSESSMENT">Assessment</option>
+                  <option value="REPORT">Report</option>
+                  <option value="OTHER">Other</option>
+                </Select>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Risk Level</label>
-                  <select
-                    value={uploadForm.riskLevel}
-                    onChange={(e) => setUploadForm(prev => ({ ...prev, riskLevel: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="LOW">Low</option>
-                    <option value="MEDIUM">Medium</option>
-                    <option value="HIGH">High</option>
-                    <option value="CRITICAL">Critical</option>
-                  </select>
-                </div>
+                <Select
+                  label="Risk Level"
+                  value={uploadForm.riskLevel}
+                  onChange={(e) => setUploadForm(prev => ({ ...prev, riskLevel: e.target.value }))}
+                >
+                  <option value="LOW">Low</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="HIGH">High</option>
+                  <option value="CRITICAL">Critical</option>
+                </Select>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
-                  <input
-                    type="text"
-                    value={uploadForm.tags}
-                    onChange={(e) => setUploadForm(prev => ({ ...prev, tags: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Comma-separated tags (e.g., risk, compliance, 2025)"
-                  />
-                </div>
+                <Input
+                  label="Tags"
+                  type="text"
+                  value={uploadForm.tags}
+                  onChange={(e) => setUploadForm(prev => ({ ...prev, tags: e.target.value }))}
+                  placeholder="Comma-separated tags (e.g., risk, compliance, 2025)"
+                />
               </div>
 
               <div className="mt-6 flex justify-end space-x-3">

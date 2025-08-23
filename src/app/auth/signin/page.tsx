@@ -92,7 +92,7 @@ export default function SignIn() {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your email"
                 />
               </div>
@@ -111,7 +111,7 @@ export default function SignIn() {
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="appearance-none block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="appearance-none block w-full px-3 py-2 pr-10 border border-gray-300 rounded-md placeholder-gray-400 text-black bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your password"
                 />
                 <button
@@ -157,11 +157,11 @@ export default function SignIn() {
 
             <div className="mt-4 bg-gray-50 rounded-md p-4">
               <p className="text-sm text-gray-600 mb-2">For demo purposes, you can use:</p>
-              <div className="space-y-1 text-sm font-mono">
-                <p><span className="text-gray-500">Admin:</span> admin@example.com / password123</p>
-                <p><span className="text-gray-500">Manager:</span> manager@example.com / password123</p>
-                <p><span className="text-gray-500">User:</span> user@example.com / password123</p>
-                <p><span className="text-gray-500">Viewer:</span> viewer@example.com / password123</p>
+              <div className="space-y-1 text-sm font-mono text-black">
+                <p><span className="text-gray-500">Demo User:</span> demo@riskdocs.com / demo123</p>
+                <p><span className="text-gray-500">Admin:</span> admin@riskdocs.com / admin123</p>
+                <p><span className="text-gray-500">Manager:</span> manager@riskdocs.com / demo123</p>
+                <p><span className="text-gray-500">Viewer:</span> viewer@riskdocs.com / demo123</p>
               </div>
             </div>
           </div>

@@ -24,3 +24,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Ensure all form inputs have proper text color */
+input,
+textarea,
+select {
+  color: #000000 !important;
+  background-color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Dark mode override for inputs */
+@media (prefers-color-scheme: dark) {
+  input,
+  textarea,
+  select {
+    color: #000000 !important;
+    background-color: #ffffff;
+    border-color: #d1d5db;
+  }
+  
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    background-color: #f3f4f6;
+    color: #4b5563 !important;
+  }
+}

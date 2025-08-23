@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Search, Filter, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { Select } from '@/components/Input'
 
 interface SearchFilters {
   category: string
@@ -60,7 +61,7 @@ export default function SearchBar() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search documents, policies, procedures..."
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-l-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-l-lg leading-5 bg-white text-black placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           
@@ -110,83 +111,63 @@ export default function SearchBar() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Category Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Category
-              </label>
-              <select
-                value={filters.category}
-                onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Categories</option>
-                <option value="COMPLIANCE">Compliance</option>
-                <option value="OPERATIONAL_RISK">Operational Risk</option>
-                <option value="FINANCIAL_RISK">Financial Risk</option>
-                <option value="CYBERSECURITY">Cybersecurity</option>
-                <option value="REGULATORY">Regulatory</option>
-                <option value="POLICY">Policy</option>
-                <option value="PROCEDURE">Procedure</option>
-                <option value="ASSESSMENT">Assessment</option>
-                <option value="REPORT">Report</option>
-              </select>
-            </div>
+            <Select
+              label="Category"
+              value={filters.category}
+              onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+            >
+              <option value="">All Categories</option>
+              <option value="COMPLIANCE">Compliance</option>
+              <option value="OPERATIONAL_RISK">Operational Risk</option>
+              <option value="FINANCIAL_RISK">Financial Risk</option>
+              <option value="CYBERSECURITY">Cybersecurity</option>
+              <option value="REGULATORY">Regulatory</option>
+              <option value="POLICY">Policy</option>
+              <option value="PROCEDURE">Procedure</option>
+              <option value="ASSESSMENT">Assessment</option>
+              <option value="REPORT">Report</option>
+            </Select>
 
             {/* Risk Level Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Risk Level
-              </label>
-              <select
-                value={filters.riskLevel}
-                onChange={(e) => setFilters({ ...filters, riskLevel: e.target.value })}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Risk Levels</option>
-                <option value="LOW">Low</option>
-                <option value="MEDIUM">Medium</option>
-                <option value="HIGH">High</option>
-                <option value="CRITICAL">Critical</option>
-              </select>
-            </div>
+            <Select
+              label="Risk Level"
+              value={filters.riskLevel}
+              onChange={(e) => setFilters({ ...filters, riskLevel: e.target.value })}
+            >
+              <option value="">All Risk Levels</option>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+              <option value="CRITICAL">Critical</option>
+            </Select>
 
             {/* Compliance Status Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Compliance Status
-              </label>
-              <select
-                value={filters.complianceStatus}
-                onChange={(e) => setFilters({ ...filters, complianceStatus: e.target.value })}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Statuses</option>
-                <option value="PENDING">Pending</option>
-                <option value="APPROVED">Approved</option>
-                <option value="REJECTED">Rejected</option>
-                <option value="UNDER_REVIEW">Under Review</option>
-                <option value="EXPIRED">Expired</option>
-              </select>
-            </div>
+            <Select
+              label="Compliance Status"
+              value={filters.complianceStatus}
+              onChange={(e) => setFilters({ ...filters, complianceStatus: e.target.value })}
+            >
+              <option value="">All Statuses</option>
+              <option value="PENDING">Pending</option>
+              <option value="APPROVED">Approved</option>
+              <option value="REJECTED">Rejected</option>
+              <option value="UNDER_REVIEW">Under Review</option>
+              <option value="EXPIRED">Expired</option>
+            </Select>
 
             {/* Date Range Filter */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Date Range
-              </label>
-              <select
-                value={filters.dateRange}
-                onChange={(e) => setFilters({ ...filters, dateRange: e.target.value })}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Time</option>
-                <option value="today">Today</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
-                <option value="quarter">This Quarter</option>
-                <option value="year">This Year</option>
-              </select>
-            </div>
+            <Select
+              label="Date Range"
+              value={filters.dateRange}
+              onChange={(e) => setFilters({ ...filters, dateRange: e.target.value })}
+            >
+              <option value="">All Time</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="quarter">This Quarter</option>
+              <option value="year">This Year</option>
+            </Select>
           </div>
 
           {/* Apply Filters Button */}

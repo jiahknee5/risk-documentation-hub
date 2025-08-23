@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Navigation } from '@/components/Navigation'
 import { AuthCheck } from '@/components/AuthCheck'
+import { Input, Select } from '@/components/Input'
 
 export default function SettingsPage() {
   return (
@@ -62,40 +63,32 @@ function SettingsContent() {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-4">Profile Information</h3>
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Name</label>
-                      <input
-                        type="text"
-                        defaultValue={session?.user?.name || ''}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Email</label>
-                      <input
-                        type="email"
-                        defaultValue={session?.user?.email || ''}
-                        disabled
-                        className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm sm:text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Department</label>
-                      <input
-                        type="text"
-                        placeholder="e.g., Risk Management"
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Role</label>
-                      <input
-                        type="text"
-                        defaultValue="User"
-                        disabled
-                        className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm sm:text-sm"
-                      />
-                    </div>
+                    <Input
+                      label="Name"
+                      type="text"
+                      defaultValue={session?.user?.name || ''}
+                      className="mt-1"
+                    />
+                    <Input
+                      label="Email"
+                      type="email"
+                      defaultValue={session?.user?.email || ''}
+                      disabled
+                      className="mt-1 bg-gray-100"
+                    />
+                    <Input
+                      label="Department"
+                      type="text"
+                      placeholder="e.g., Risk Management"
+                      className="mt-1"
+                    />
+                    <Input
+                      label="Role"
+                      type="text"
+                      defaultValue="User"
+                      disabled
+                      className="mt-1 bg-gray-100"
+                    />
                   </div>
                 </div>
                 <div className="flex justify-end">
@@ -116,27 +109,21 @@ function SettingsContent() {
                       <h4 className="font-medium text-gray-900">Change Password</h4>
                       <p className="text-sm text-gray-600 mb-4">Update your password regularly for better security</p>
                       <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700">Current Password</label>
-                          <input
-                            type="password"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700">New Password</label>
-                          <input
-                            type="password"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700">Confirm New Password</label>
-                          <input
-                            type="password"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                          />
-                        </div>
+                        <Input
+                          label="Current Password"
+                          type="password"
+                          className="mt-1"
+                        />
+                        <Input
+                          label="New Password"
+                          type="password"
+                          className="mt-1"
+                        />
+                        <Input
+                          label="Confirm New Password"
+                          type="password"
+                          className="mt-1"
+                        />
                       </div>
                     </div>
                     <div className="border rounded-lg p-4">
@@ -184,32 +171,29 @@ function SettingsContent() {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-4">Application Preferences</h3>
                   <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Default View</label>
-                      <select className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                        <option>Dashboard</option>
-                        <option>Documents</option>
-                        <option>Compliance</option>
-                        <option>Analytics</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
-                      <select className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                        <option>MM/DD/YYYY</option>
-                        <option>DD/MM/YYYY</option>
-                        <option>YYYY-MM-DD</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Items per Page</label>
-                      <select className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                        <option>10</option>
-                        <option>25</option>
-                        <option>50</option>
-                        <option>100</option>
-                      </select>
-                    </div>
+                    <Select
+                      label="Default View"
+                    >
+                      <option>Dashboard</option>
+                      <option>Documents</option>
+                      <option>Compliance</option>
+                      <option>Analytics</option>
+                    </Select>
+                    <Select
+                      label="Date Format"
+                    >
+                      <option>MM/DD/YYYY</option>
+                      <option>DD/MM/YYYY</option>
+                      <option>YYYY-MM-DD</option>
+                    </Select>
+                    <Select
+                      label="Items per Page"
+                    >
+                      <option>10</option>
+                      <option>25</option>
+                      <option>50</option>
+                      <option>100</option>
+                    </Select>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { Navigation } from '@/components/Navigation'
 import { AuthCheck } from '@/components/AuthCheck'
+import { Input, Select } from '@/components/Input'
 
 export default function SearchPage() {
   return (
@@ -81,7 +82,7 @@ function SearchContent() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white text-black placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Search for documents, policies, procedures..."
                 />
               </div>
@@ -89,52 +90,43 @@ function SearchContent() {
 
             {/* Filters */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                <select
-                  value={filters.category}
-                  onChange={(e) => handleFilterChange('category', e.target.value)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="">All Categories</option>
-                  <option value="risk-management">Risk Management</option>
-                  <option value="compliance">Compliance</option>
-                  <option value="policies">Policies</option>
-                  <option value="procedures">Procedures</option>
-                  <option value="reports">Reports</option>
-                </select>
-              </div>
+              <Select
+                label="Category"
+                value={filters.category}
+                onChange={(e) => handleFilterChange('category', e.target.value)}
+              >
+                <option value="">All Categories</option>
+                <option value="risk-management">Risk Management</option>
+                <option value="compliance">Compliance</option>
+                <option value="policies">Policies</option>
+                <option value="procedures">Procedures</option>
+                <option value="reports">Reports</option>
+              </Select>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
-                <select
-                  value={filters.dateRange}
-                  onChange={(e) => handleFilterChange('dateRange', e.target.value)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="">Any Time</option>
-                  <option value="today">Today</option>
-                  <option value="week">This Week</option>
-                  <option value="month">This Month</option>
-                  <option value="quarter">This Quarter</option>
-                  <option value="year">This Year</option>
-                </select>
-              </div>
+              <Select
+                label="Date Range"
+                value={filters.dateRange}
+                onChange={(e) => handleFilterChange('dateRange', e.target.value)}
+              >
+                <option value="">Any Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="quarter">This Quarter</option>
+                <option value="year">This Year</option>
+              </Select>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">File Type</label>
-                <select
-                  value={filters.fileType}
-                  onChange={(e) => handleFilterChange('fileType', e.target.value)}
-                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="">All Types</option>
-                  <option value="pdf">PDF</option>
-                  <option value="doc">Word Document</option>
-                  <option value="md">Markdown</option>
-                  <option value="txt">Text File</option>
-                </select>
-              </div>
+              <Select
+                label="File Type"
+                value={filters.fileType}
+                onChange={(e) => handleFilterChange('fileType', e.target.value)}
+              >
+                <option value="">All Types</option>
+                <option value="pdf">PDF</option>
+                <option value="doc">Word Document</option>
+                <option value="md">Markdown</option>
+                <option value="txt">Text File</option>
+              </Select>
             </div>
 
             {/* Search Button */}
