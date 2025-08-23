@@ -46,12 +46,10 @@ export async function GET(request: NextRequest) {
         where: {
           isActive: true,
           OR: [
-            { title: { contains: query } },
-            { description: { contains: query } },
-            { content: { contains: query } },
-            { tags: { contains: query } },
-            { summary: { contains: query } },
-            { keyPoints: { contains: query } }
+            { title: { contains: query, mode: 'insensitive' } },
+            { description: { contains: query, mode: 'insensitive' } },
+            { tags: { contains: query, mode: 'insensitive' } },
+            { fileName: { contains: query, mode: 'insensitive' } }
           ]
         },
         take: limit,
@@ -60,11 +58,7 @@ export async function GET(request: NextRequest) {
             select: { id: true, name: true, email: true, department: true }
           }
         },
-        orderBy: [
-          // Prioritize title matches
-          { title: 'desc' },
-          { createdAt: 'desc' }
-        ]
+        orderBy: { createdAt: 'desc' }
       })
 
       searchResults = documents.map(doc => ({
@@ -118,37 +112,27 @@ function calculateRelevanceScore(document: any, query: string): number {
   const queryLower = query.toLowerCase()
 
   // Title matches get highest score
-  if (document.title?.toLowerCase().includes(queryLower)) {
+  if (document.title && document.title.toLowerCase().includes(queryLower)) {
     score += 10
     // Exact title match gets even more points
-    if (document.title?.toLowerCase() === queryLower) {
+    if (document.title.toLowerCase() === queryLower) {
       score += 20
     }
   }
 
   // Description matches
-  if (document.description?.toLowerCase().includes(queryLower)) {
+  if (document.description && document.description.toLowerCase().includes(queryLower)) {
     score += 5
   }
 
-  // Content matches (but less important due to potential noise)
-  if (document.content?.toLowerCase().includes(queryLower)) {
-    score += 2
-  }
-
-  // Summary matches (AI-generated, likely relevant)
-  if (document.summary?.toLowerCase().includes(queryLower)) {
-    score += 7
-  }
-
   // Tag matches
-  if (document.tags?.toLowerCase().includes(queryLower)) {
+  if (document.tags && document.tags.toLowerCase().includes(queryLower)) {
     score += 8
   }
 
-  // Key points matches
-  if (document.keyPoints?.toLowerCase().includes(queryLower)) {
-    score += 6
+  // fileName matches
+  if (document.fileName && document.fileName.toLowerCase().includes(queryLower)) {
+    score += 3
   }
 
   // Boost score for recent documents
@@ -172,23 +156,17 @@ function calculateRelevanceScore(document: any, query: string): number {
 function getMatchType(document: any, query: string): string {
   const queryLower = query.toLowerCase()
 
-  if (document.title?.toLowerCase().includes(queryLower)) {
+  if (document.title && document.title.toLowerCase().includes(queryLower)) {
     return 'title'
   }
-  if (document.description?.toLowerCase().includes(queryLower)) {
+  if (document.description && document.description.toLowerCase().includes(queryLower)) {
     return 'description'
   }
-  if (document.summary?.toLowerCase().includes(queryLower)) {
-    return 'summary'
-  }
-  if (document.tags?.toLowerCase().includes(queryLower)) {
+  if (document.tags && document.tags.toLowerCase().includes(queryLower)) {
     return 'tags'
   }
-  if (document.keyPoints?.toLowerCase().includes(queryLower)) {
-    return 'key_points'
-  }
-  if (document.content?.toLowerCase().includes(queryLower)) {
-    return 'content'
+  if (document.fileName && document.fileName.toLowerCase().includes(queryLower)) {
+    return 'filename'
   }
 
   return 'unknown'
@@ -222,11 +200,10 @@ export async function POST(request: NextRequest) {
     // Add text search
     if (query && query.trim()) {
       where.OR = [
-        { title: { contains: query } },
-        { description: { contains: query } },
-        { content: { contains: query } },
-        { tags: { contains: query } },
-        { summary: { contains: query } }
+        { title: { contains: query, mode: 'insensitive' } },
+        { description: { contains: query, mode: 'insensitive' } },
+        { tags: { contains: query, mode: 'insensitive' } },
+        { fileName: { contains: query, mode: 'insensitive' } }
       ]
     }
 

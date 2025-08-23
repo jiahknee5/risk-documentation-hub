@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { Navigation } from '@/components/Navigation'
 import { AuthCheck } from '@/components/AuthCheck'
 import { Input, Select } from '@/components/Input'
@@ -16,6 +17,7 @@ export default function SearchPage() {
 
 function SearchContent() {
   const { data: session } = useSession()
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isSearching, setIsSearching] = useState(false)
@@ -33,17 +35,27 @@ function SearchContent() {
     
     try {
       const searchParams = new URLSearchParams({
-        q: searchQuery,
-        ...filters
+        q: searchQuery
+      })
+      
+      // Add filters to search params
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) {
+          searchParams.append(key, value)
+        }
       })
       
       const response = await fetch(`/api/search?${searchParams}`)
       if (response.ok) {
-        const results = await response.json()
-        setSearchResults(results)
+        const data = await response.json()
+        setSearchResults(data.results || [])
+      } else {
+        console.error('Search failed:', response.status, response.statusText)
+        setSearchResults([])
       }
     } catch (error) {
       console.error('Search error:', error)
+      setSearchResults([])
     } finally {
       setIsSearching(false)
     }
@@ -204,7 +216,7 @@ function SearchContent() {
                               {result.category}
                             </span>
                             <span>Uploaded {new Date(result.createdAt).toLocaleDateString()}</span>
-                            <span>{result.fileSize}</span>
+                            <span>{result.fileSize ? `${(result.fileSize / 1024).toFixed(1)} KB` : ''}</span>
                           </div>
                         </div>
                       </div>
@@ -217,7 +229,10 @@ function SearchContent() {
                       )}
                     </div>
                     <div className="flex-shrink-0 ml-4">
-                      <button className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                      <button 
+                        onClick={() => router.push('/documents')}
+                        className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      >
                         View Document
                       </button>
                     </div>
