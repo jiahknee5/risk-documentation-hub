@@ -84,7 +84,7 @@ class GrokProvider implements AIProvider {
           'Authorization': `Bearer ${this.apiKey}`
         },
         body: JSON.stringify({
-          model: options?.model || 'grok-beta',
+          model: options?.model || 'grok-2-latest',
           messages,
           temperature: options?.temperature || 0.3,
           max_tokens: options?.maxTokens || 500
