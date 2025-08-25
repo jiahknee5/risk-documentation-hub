@@ -3,13 +3,11 @@ import { getServerSession } from 'next-auth'
 import { prisma } from '@/lib/db'
 import { authOptions } from '@/lib/auth'
 import { LightweightBankingRAG } from '@/lib/rag/lightweight-search'
-import OpenAI from 'openai'
+import { getAIProvider, createRiskManagementPrompt } from '@/lib/ai-providers'
 
-// Initialize RAG system and OpenAI
+// Initialize RAG system and AI provider
 const ragSystem = new LightweightBankingRAG()
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-})
+const aiProvider = getAIProvider()
 
 // Load all documents into RAG on startup
 async function initializeRAG() {
@@ -89,28 +87,12 @@ Risk Insights: ${result.riskInsights?.topRisks.join(', ') || 'N/A'}`
           })
           .join('\n\n---\n\n')
 
-        // Generate AI response
-        const completion = await openai.chat.completions.create({
-          model: 'gpt-3.5-turbo',
-          messages: [
-            {
-              role: 'system',
-              content: `You are a risk management expert assistant. Based on the provided documents, answer the user's question comprehensively. Focus on:
-1. Key risks and compliance requirements
-2. Specific recommendations based on the documents
-3. Any critical alerts or immediate actions needed
-Always cite the specific documents you're referencing.`
-            },
-            {
-              role: 'user',
-              content: `Context Documents:\n${context}\n\nUser Question: ${query}\n\nProvide a comprehensive answer based on these documents.`
-            }
-          ],
+        // Generate AI response using configured provider
+        const messages = createRiskManagementPrompt(context, query)
+        aiResponse = await aiProvider.generateResponse(messages, {
           temperature: 0.3,
-          max_tokens: 500
+          maxTokens: 500
         })
-
-        aiResponse = completion.choices[0].message.content
       } catch (aiError) {
         console.error('AI generation failed:', aiError)
         // Continue without AI response
@@ -165,7 +147,7 @@ Always cite the specific documents you're referencing.`
           'Semantic search with banking terminology',
           'Risk level assessment',
           'Compliance framework detection',
-          'AI-enhanced responses',
+          `AI-enhanced responses (${aiProvider.name})`,
           'Real-time alerts'
         ]
       }

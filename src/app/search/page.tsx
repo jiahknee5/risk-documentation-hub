@@ -193,7 +193,7 @@ function SearchContent() {
                   <div className={`absolute left-1 top-1 w-6 h-6 rounded-full bg-white transition ${useAI ? 'transform translate-x-6' : ''}`}></div>
                 </div>
                 <span className="ml-3 text-sm font-medium text-gray-700">
-                  Use AI-Enhanced Search (GPT-3.5)
+                  Use AI-Enhanced Search
                 </span>
               </label>
             </div>

@@ -38,14 +38,36 @@ super-secret-key-for-risk-docs-hub-2024-production
 https://risk.johnnycchung.com
 ```
 
-#### OPENAI_API_KEY (Required for AI features)
-```
-sk-[your-actual-openai-api-key]
-```
-Get from: https://platform.openai.com/api-keys
+#### AI Provider Configuration
 
-#### Optional: GROK_API_KEY
-If you prefer Grok over OpenAI (requires code modification)
+The system supports multiple AI providers. Choose one:
+
+**Option 1: OSS-GPT (Self-hosted) - Recommended**
+```
+AI_PROVIDER="oss-gpt"
+OSS_GPT_BASE_URL="http://your-oss-gpt-server:8080"
+OSS_GPT_API_KEY=""  # Optional
+```
+
+**Option 2: Grok**
+```
+AI_PROVIDER="grok"
+GROK_API_KEY="xai-your-grok-api-key"
+GROK_BASE_URL="https://api.x.ai/v1"
+```
+
+**Option 3: OpenAI**
+```
+AI_PROVIDER="openai"
+OPENAI_API_KEY="sk-your-openai-api-key"
+```
+
+**Option 4: No AI**
+```
+AI_PROVIDER="disabled"
+```
+
+See [AI_PROVIDER_GUIDE.md](./AI_PROVIDER_GUIDE.md) for detailed setup instructions.
 
 ## Feature Usage Guide
 
@@ -160,8 +182,9 @@ vercel env ls
 
 ### Common Issues
 
-1. **"No OpenAI API key"**
-   - Add OPENAI_API_KEY in Vercel environment variables
+1. **"AI provider not configured"**
+   - Add AI_PROVIDER and corresponding API keys in Vercel environment variables
+   - See [AI_PROVIDER_GUIDE.md](./AI_PROVIDER_GUIDE.md) for setup
    - Redeploy after adding
 
 2. **"Database not initialized"**
@@ -181,7 +204,8 @@ vercel env ls
 ## Next Steps
 
 1. **Immediate**
-   - Add OPENAI_API_KEY in Vercel dashboard
+   - Configure your preferred AI provider (OSS-GPT recommended)
+   - Add environment variables in Vercel dashboard
    - Test with real banking documents
 
 2. **Recommended**
