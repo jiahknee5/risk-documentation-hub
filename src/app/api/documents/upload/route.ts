@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
     const category = formData.get('category') as string || 'OTHER'
     const riskLevel = formData.get('riskLevel') as string || 'MEDIUM'
     const tags = formData.get('tags') as string || ''
+    const skipProcessing = formData.get('skipProcessing') === 'true'
 
     console.log('Upload details:', {
       fileName: file?.name,
@@ -62,7 +63,8 @@ export async function POST(request: NextRequest) {
         fileSize: file.size,
         mimeType: file.type,
         uploadedBy: session.user.id || 'system',
-        isActive: true
+        isActive: true,
+        isProcessed: false // Documents start as unprocessed
       }
     })
 
@@ -83,17 +85,21 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Re-initialize RAG with new document
-    try {
-      await reinitializeRAG()
-    } catch (ragError) {
-      console.error('Failed to reinitialize RAG:', ragError)
-      // Don't fail the upload if RAG initialization fails
+    // Only process for RAG if not skipped
+    if (!skipProcessing) {
+      try {
+        await reinitializeRAG()
+      } catch (ragError) {
+        console.error('Failed to reinitialize RAG:', ragError)
+        // Don't fail the upload if RAG initialization fails
+      }
     }
 
     return NextResponse.json({
       success: true,
-      document: document
+      document: document,
+      documentId: document.id,
+      needsProcessing: skipProcessing
     })
   } catch (error) {
     console.error('Error creating document:', error)

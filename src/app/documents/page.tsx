@@ -19,9 +19,12 @@ function DocumentsContent() {
   const [documents, setDocuments] = useState([])
   const [isUploading, setIsUploading] = useState(false)
   const [showUploadModal, setShowUploadModal] = useState(false)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]) // Changed to array for multiple files
   const [showViewModal, setShowViewModal] = useState(false)
   const [viewingDocument, setViewingDocument] = useState<any>(null)
+  const [uploadProgress, setUploadProgress] = useState<{[key: string]: number}>({}) // Track upload progress per file
+  const [unprocessedFiles, setUnprocessedFiles] = useState<string[]>([]) // Track files pending processing
+  const [isProcessing, setIsProcessing] = useState(false)
   const [uploadForm, setUploadForm] = useState({
     title: '',
     description: '',
@@ -31,30 +34,35 @@ function DocumentsContent() {
   })
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      setSelectedFile(file)
-      setUploadForm(prev => ({
-        ...prev,
-        title: file.name.replace(/\.[^/.]+$/, '') // Remove file extension
-      }))
+    const files = event.target.files
+    if (files && files.length > 0) {
+      const fileArray = Array.from(files)
+      setSelectedFiles(fileArray)
+      // For multiple files, show modal without setting title
       setShowUploadModal(true)
     }
     event.target.value = '' // Reset file input
   }
 
   const handleUpload = async () => {
-    if (!selectedFile) return
+    if (selectedFiles.length === 0) return
 
     setIsUploading(true)
     
-    const formData = new FormData()
-    formData.append('file', selectedFile)
-    formData.append('title', uploadForm.title)
-    formData.append('description', uploadForm.description)
-    formData.append('category', uploadForm.category)
-    formData.append('riskLevel', uploadForm.riskLevel)
-    formData.append('tags', uploadForm.tags)
+    // Track which files need processing
+    const filesNeedingProcessing: string[] = []
+    
+    // Upload files one by one to track progress
+    for (const file of selectedFiles) {
+      const formData = new FormData()
+      formData.append('file', file)
+      // For multiple files, use filename as title if not specified
+      formData.append('title', selectedFiles.length === 1 ? uploadForm.title : file.name.replace(/\.[^/.]+$/, ''))
+      formData.append('description', uploadForm.description)
+      formData.append('category', uploadForm.category)
+      formData.append('riskLevel', uploadForm.riskLevel)
+      formData.append('tags', uploadForm.tags)
+      formData.append('skipProcessing', 'true') // Don't process immediately
     
     try {
       // Try the main upload endpoint first
@@ -102,34 +110,76 @@ function DocumentsContent() {
       if (response.ok) {
         const result = await response.json()
         console.log('Upload successful:', result)
-        // Reset form
-        setShowUploadModal(false)
-        setSelectedFile(null)
-        setUploadForm({
-          title: '',
-          description: '',
-          category: 'POLICY',
-          riskLevel: 'MEDIUM',
-          tags: ''
-        })
-        // Refresh documents list immediately and with a delay
-        fetchDocuments()
-        // Also refresh after a short delay in case of async processing
-        setTimeout(() => {
-          console.log('Refreshing documents after delay...')
-          fetchDocuments()
-        }, 1000)
+        
+        // Track file for processing
+        if (result.documentId) {
+          filesNeedingProcessing.push(result.documentId)
+        }
+        
+        // Update progress
+        setUploadProgress(prev => ({ ...prev, [file.name]: 100 }))
       } else {
         const errorData = await response.json()
         console.error('Upload failed:', response.status, errorData)
-        alert(`Upload failed: ${errorData.error || response.statusText}`)
+        setUploadProgress(prev => ({ ...prev, [file.name]: -1 })) // Mark as failed
       }
     } catch (error) {
       console.error('Upload error:', error)
-      alert('Upload error. Please try again.')
+      setUploadProgress(prev => ({ ...prev, [file.name]: -1 })) // Mark as failed
+    }
     }
     
+    // After all uploads complete
+    setShowUploadModal(false)
+    setSelectedFiles([])
+    setUploadForm({
+      title: '',
+      description: '',
+      category: 'POLICY',
+      riskLevel: 'MEDIUM',
+      tags: ''
+    })
+    
+    // Save unprocessed files to state
+    setUnprocessedFiles(prev => [...prev, ...filesNeedingProcessing])
+    
+    // Refresh documents list
+    fetchDocuments()
     setIsUploading(false)
+  }
+  
+  // New function to process uploaded files for RAG
+  const handleProcessFiles = async () => {
+    if (unprocessedFiles.length === 0) {
+      alert('No files to process')
+      return
+    }
+    
+    setIsProcessing(true)
+    
+    try {
+      const response = await fetch('/api/rag/process', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ documentIds: unprocessedFiles })
+      })
+      
+      if (response.ok) {
+        const result = await response.json()
+        console.log('Processing complete:', result)
+        setUnprocessedFiles([]) // Clear processed files
+        alert(`Successfully processed ${result.processedCount} documents for RAG search`)
+        fetchDocuments() // Refresh to show processed status
+      } else {
+        const error = await response.json()
+        alert(`Processing failed: ${error.error || 'Unknown error'}`)
+      }
+    } catch (error) {
+      console.error('Processing error:', error)
+      alert('Failed to process documents')
+    }
+    
+    setIsProcessing(false)
   }
 
   const fetchDocuments = async () => {
@@ -194,7 +244,24 @@ function DocumentsContent() {
 
   useEffect(() => {
     fetchDocuments()
+    // Load unprocessed files from session storage
+    loadUnprocessedFiles()
   }, [])
+  
+  // Load unprocessed files from previous sessions
+  const loadUnprocessedFiles = async () => {
+    try {
+      const response = await fetch('/api/documents/unprocessed')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.unprocessedIds && data.unprocessedIds.length > 0) {
+          setUnprocessedFiles(data.unprocessedIds)
+        }
+      }
+    } catch (error) {
+      console.error('Error loading unprocessed files:', error)
+    }
+  }
 
   const handleView = (document: any) => {
     setViewingDocument(document)
@@ -249,7 +316,33 @@ function DocumentsContent() {
 
         {/* Upload Section */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Upload Documents</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold text-gray-900">Upload Documents</h2>
+            {unprocessedFiles.length > 0 && (
+              <button
+                onClick={handleProcessFiles}
+                disabled={isProcessing}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                {isProcessing ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Process {unprocessedFiles.length} Files for RAG
+                  </>
+                )}
+              </button>
+            )}
+          </div>
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
             <input
               type="file"
@@ -257,6 +350,7 @@ function DocumentsContent() {
               onChange={handleFileSelect}
               className="hidden"
               id="file-upload"
+              multiple // Enable multiple file selection
               disabled={isUploading || showUploadModal}
             />
             <label
@@ -272,7 +366,7 @@ function DocumentsContent() {
                 {isUploading ? 'Uploading...' : 'Click to upload documents'}
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                Supports PDF, DOC, DOCX, MD, TXT files
+                Supports PDF, DOC, DOCX, MD, TXT files (multiple files allowed)
               </p>
             </label>
           </div>
@@ -329,7 +423,14 @@ function DocumentsContent() {
                             </div>
                           </div>
                           <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">{doc.title}</div>
+                            <div className="text-sm font-medium text-gray-900">
+                              {doc.title}
+                              {doc.isProcessed && (
+                                <span className="ml-2 inline-flex px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+                                  RAG Ready
+                                </span>
+                              )}
+                            </div>
                             <div className="text-sm text-gray-500">{doc.description}</div>
                           </div>
                         </div>
@@ -370,22 +471,42 @@ function DocumentsContent() {
         {/* Upload Modal */}
         {showUploadModal && (
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Upload Document</h3>
+            <div className="bg-white rounded-lg p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">
+                Upload {selectedFiles.length > 1 ? `${selectedFiles.length} Documents` : 'Document'}
+              </h3>
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">File</label>
-                  <p className="text-sm text-gray-600">{selectedFile?.name}</p>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Files</label>
+                  <div className="space-y-1 max-h-32 overflow-y-auto">
+                    {selectedFiles.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between text-sm text-gray-600 bg-gray-50 p-2 rounded">
+                        <span className="truncate">{file.name}</span>
+                        <span className="text-xs text-gray-500">{(file.size / 1024).toFixed(1)} KB</span>
+                        {uploadProgress[file.name] !== undefined && (
+                          <span className={`text-xs ${
+                            uploadProgress[file.name] === 100 ? 'text-green-600' : 
+                            uploadProgress[file.name] === -1 ? 'text-red-600' : 'text-blue-600'
+                          }`}>
+                            {uploadProgress[file.name] === 100 ? '✓' : 
+                             uploadProgress[file.name] === -1 ? '✗' : `${uploadProgress[file.name]}%`}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                <Input
-                  label="Title"
-                  type="text"
-                  value={uploadForm.title}
-                  onChange={(e) => setUploadForm(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="Document title"
-                />
+                {selectedFiles.length === 1 && (
+                  <Input
+                    label="Title"
+                    type="text"
+                    value={uploadForm.title}
+                    onChange={(e) => setUploadForm(prev => ({ ...prev, title: e.target.value }))}
+                    placeholder="Document title (optional)"
+                  />
+                )}
 
                 <Textarea
                   label="Description"
@@ -436,7 +557,8 @@ function DocumentsContent() {
                 <button
                   onClick={() => {
                     setShowUploadModal(false)
-                    setSelectedFile(null)
+                    setSelectedFiles([])
+                    setUploadProgress({})
                   }}
                   className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
                   disabled={isUploading}
@@ -446,9 +568,9 @@ function DocumentsContent() {
                 <button
                   onClick={handleUpload}
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
-                  disabled={isUploading || !uploadForm.title}
+                  disabled={isUploading || (selectedFiles.length === 1 && !uploadForm.title && !selectedFiles[0])}
                 >
-                  {isUploading ? 'Uploading...' : 'Upload'}
+                  {isUploading ? `Uploading... (${Object.keys(uploadProgress).length}/${selectedFiles.length})` : 'Upload All'}
                 </button>
               </div>
             </div>

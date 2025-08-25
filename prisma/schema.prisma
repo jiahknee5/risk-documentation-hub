@@ -62,6 +62,8 @@ model Document {
   content          String?          // Extracted text content for search
   summary          String?          // AI-generated summary
   keyPoints        String?          // JSON array of key points
+  isProcessed      Boolean          @default(false) // Track if document has been processed for RAG
+  processedAt      DateTime?        // When document was processed for RAG
   uploadedBy       String
   approvedBy       String?
   approvedAt       DateTime?
@@ -84,6 +86,7 @@ model Document {
   @@index([riskLevel])
   @@index([createdAt])
   @@index([uploadedBy])
+  @@index([isProcessed])
   @@map("documents")
 }
 
@@ -199,6 +202,7 @@ enum AuditAction {
   USER_UPDATED
   USER_DELETED
   SEARCH_PERFORMED
+  DOCUMENTS_PROCESSED_FOR_RAG
 }
 
 // Approval Workflow
